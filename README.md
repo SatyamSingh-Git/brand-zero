@@ -99,6 +99,7 @@ Rohit isn't a worse operator. He states 12-point intervals on a question that mo
 
 | | |
 |---|---|
+| **[The deck (13 slides, PDF)](deck/brand-zero.pdf)** | The submission itself. Source: [deck/index.html](deck/index.html) |
 | [Architecture, data sources, HITL checkpoints](docs/architecture.md) | Where claims come from, the five agents, and the six places a human decides |
 | [Tech stack + 30-day roadmap](docs/roadmap-30-day.md) | What ships each week, what is deliberately not built, and how to tell whether it worked |
 | [Portfolio research notes](docs/portfolio-notes.md) | Every Think9 claim traced to a source, with inferences flagged |

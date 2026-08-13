@@ -1,0 +1,539 @@
+<title>Brand Zero — Think9 AI &amp; Intelligence Challenge</title>
+<style>
+  @page { size: 13.333in 7.5in; margin: 0; }
+
+  :root{
+    --ink:#17170f; --ink2:#55554d; --muted:#8a8a80;
+    --line:#e7e7e1; --hair:#f0f0ec;
+    --brand:#0f5c46; --brand-soft:#eaf2ef;
+    --blue:#2a78d6; --orange:#eb6834; --aqua:#1baf7a;
+    --bad:#c0392f; --good:#0f6b3c;
+    --cream:#faf9f5;
+  }
+  *{box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+  html,body{margin:0;padding:0;background:#e9e9e4}
+  body{font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);
+       -webkit-font-smoothing:antialiased}
+
+  .slide{
+    position:relative; width:13.333in; height:7.5in; background:#fff;
+    padding:0.62in 0.78in 0.55in; overflow:hidden;
+    margin:0 auto 26px; box-shadow:0 2px 18px rgba(0,0,0,.10);
+    page-break-after:always; break-after:page;
+    display:flex; flex-direction:column;
+  }
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  @media print{ body{background:#fff} .slide{margin:0;box-shadow:none} }
+
+  /* ---------- chrome ---------- */
+  .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex:none}
+  .eyebrow .n{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--brand)}
+  .eyebrow .rule{flex:1;height:1px;background:var(--line)}
+  .eyebrow .tag{font-size:11px;font-weight:600;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted)}
+  h1{font-size:40px;line-height:1.14;letter-spacing:-.022em;font-weight:650;margin:0 0 10px}
+  h1 .dim{color:var(--muted);font-weight:400}
+  .sub{font-size:19px;line-height:1.5;color:var(--ink2);margin:0 0 24px;max-width:78ch}
+  .sub b{color:var(--ink);font-weight:650}
+  .body{flex:1;min-height:0}
+  .foot{flex:none;font-size:12px;color:var(--muted);border-top:1px solid var(--hair);
+    padding-top:9px;margin-top:14px}
+  .foot b{color:var(--ink2);font-weight:600}
+
+  /* ---------- title slide ---------- */
+  .cover{background:var(--cream);justify-content:center;padding:0 1.1in}
+  .cover .kicker{font-size:12px;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--brand);margin-bottom:26px}
+  .cover .line{font-size:52px;line-height:1.16;letter-spacing:-.03em;font-weight:650;
+    max-width:19ch;margin:0 0 26px}
+  .cover .line em{font-style:normal;color:var(--brand)}
+  .cover .who{font-size:17px;color:var(--ink2);line-height:1.6}
+  .cover .who b{color:var(--ink);font-weight:650}
+  .cover .mark{position:absolute;right:1.1in;top:50%;transform:translateY(-50%);
+    width:2.5in;height:2.5in;border-radius:50%;background:var(--brand-soft);
+    display:flex;align-items:center;justify-content:center;text-align:center}
+  .cover .mark span{font-size:15px;font-weight:650;color:var(--brand);line-height:1.45;padding:0 24px}
+
+  /* ---------- building blocks ---------- */
+  .cols{display:grid;gap:26px;align-items:start}
+  .cols.fill{height:100%;align-items:stretch}
+  .c2{grid-template-columns:1fr 1fr}
+  .c2w{grid-template-columns:1.25fr 1fr}
+  .c3{grid-template-columns:repeat(3,1fr)}
+  .c4{grid-template-columns:repeat(4,1fr)}
+
+  .card{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+  .card.hi{background:var(--brand-soft);border-color:#cfe0d9}
+  .card .k{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:11px}
+  .card .v{font-size:38px;font-weight:680;letter-spacing:-.03em;line-height:1;
+    font-variant-numeric:tabular-nums}
+  .card .v.sm{font-size:26px}
+  .card .n{font-size:13px;color:var(--ink2);margin-top:10px;line-height:1.45}
+  .bad{color:var(--bad)} .good{color:var(--good)} .acc{color:var(--blue)} .br{color:var(--brand)}
+
+  ul.pts{margin:0;padding:0;list-style:none}
+  ul.pts li{font-size:17px;line-height:1.55;color:var(--ink2);margin-bottom:15px;
+    padding-left:20px;position:relative}
+  ul.pts li:before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;
+    border-radius:2px;background:var(--brand)}
+  ul.pts li b{color:var(--ink);font-weight:650}
+
+  table{border-collapse:collapse;width:100%;font-size:15px}
+  th,td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--hair);
+    font-variant-numeric:tabular-nums}
+  th:first-child,td:first-child{text-align:left;font-variant-numeric:normal}
+  th{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--muted);border-bottom:1px solid var(--line)}
+  tr.mark td{background:var(--brand-soft);font-weight:650}
+  td.lbl{color:var(--ink2)}
+
+  .quote{font-size:26px;line-height:1.35;font-weight:600;letter-spacing:-.015em;
+    border-left:4px solid var(--brand);padding-left:22px;color:var(--ink)}
+  .note{font-size:14px;color:var(--ink2);background:var(--cream);border:1px solid var(--line);
+    border-radius:8px;padding:14px 16px;line-height:1.55}
+  .note b{color:var(--ink);font-weight:650}
+
+  .flow{display:flex;align-items:stretch;gap:10px}
+  .flow .step{flex:1;background:var(--cream);border:1px solid var(--line);border-radius:9px;
+    padding:15px 14px;text-align:center}
+  .flow .step .t{font-size:14px;font-weight:680;margin-bottom:6px}
+  .flow .step .d{font-size:12px;color:var(--ink2);line-height:1.4}
+  .flow .arw{align-self:center;color:var(--muted);font-size:16px;flex:none}
+
+  .lane{display:grid;grid-template-columns:1.1in 1fr;gap:0 16px;align-items:start;
+    padding:11px 0;border-bottom:1px solid var(--hair)}
+  .lane:last-child{border-bottom:none}
+  .lane .wk{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--brand);padding-top:2px}
+  .lane .t{font-size:16px;font-weight:650;margin-bottom:4px}
+  .lane .d{font-size:14px;color:var(--ink2);line-height:1.5}
+
+  .bar{height:14px;border-radius:3px;background:var(--blue)}
+  .barrow{display:grid;grid-template-columns:1.5in 1fr 0.75in;align-items:center;
+    gap:12px;margin-bottom:11px;font-size:14px}
+  .barrow .lb{color:var(--ink2)}
+  .barrow .vl{text-align:right;font-variant-numeric:tabular-nums;font-weight:650}
+  .track{background:var(--hair);border-radius:3px;height:14px;position:relative}
+  .track i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;display:block}
+</style>
+
+<!-- ══════════════════════════ 1 ══════════════════════════ -->
+<section class="slide cover">
+  <div class="kicker">Think9 AI &amp; Intelligence Challenge</div>
+  <h2 class="line">If Brand 30 costs as much to get right as Brand&nbsp;1, you don't have a house of brands. <em>You have thirty startups sharing an office.</em></h2>
+  <div class="who">
+    <b>Brand Zero</b> — a shared memory that tells a launching brand what its<br>
+    neighbours already learned, and says plainly when they are no help.<br><br>
+    Satyam Singh &nbsp;·&nbsp; 15 August 2026
+  </div>
+  <div class="mark"><span>The 31st brand.<br>It ships no product.</span></div>
+</section>
+
+<!-- ══════════════════════════ 2 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">02</span><span class="rule"></span><span class="tag">The bottleneck</span></div>
+  <h1>Think9's twelfth brand launches next month. <span class="dim">Nobody knows what will work.</span></h1>
+  <p class="sub">It sits in <b>ingestible wellness</b> — the category The Good Bug, SuperYou and Panchamrit are already in. The team must pick the message for its launch ads and put budget behind it. They believe it will lift sales about 35%.</p>
+  <div class="body">
+    <div class="cols c3">
+      <div class="card">
+        <div class="k">What the lift could really be</div>
+        <div class="v">−24% <span style="font-size:22px;color:var(--muted)">to</span> +140%</div>
+        <div class="n">A campaign that loses money, or one that nearly doubles sales. Both are consistent with what they know today.</div>
+      </div>
+      <div class="card">
+        <div class="k">Cost of getting this one call wrong</div>
+        <div class="v bad">₹5.01L</div>
+        <div class="n">On ₹40L riding on the decision. Not a forecast of revenue — the expected cost of calling it the wrong way.</div>
+      </div>
+      <div class="card hi">
+        <div class="k">And this repeats</div>
+        <div class="v br">× 19</div>
+        <div class="n">Eleven brands live, thirty planned. Nineteen more launches, each paying close to full price for the same lesson.</div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:24px;margin-bottom:0">The bottleneck is not "knowledge is fragmented." It is <b>launch decision latency</b> — the weeks and rupees between <i>"we're launching X"</i> and <i>"we know what works"</i> — paid again for every brand. Today that learning travels through people in meetings: slow, lossy, and it stops working around brand seven.</p>
+  </div>
+  <div class="foot"><b>Source:</b> simulator, synthetic effects on Think9's real portfolio structure. Every assumption is a slider — see the live version.</div>
+</section>
+
+<!-- ══════════════════════════ 3 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">03</span><span class="rule"></span><span class="tag">Why the obvious answer fails</span></div>
+  <h1>The obvious fix is worse than building nothing.</h1>
+  <p class="sub">Pool all eleven brands, take the average, serve one number. This is the shape most "central AI brain" proposals quietly take. It does not make the answer more accurate — the estimate is still just the portfolio average. It only makes the answer <b>sound</b> certain. And certainty is the part that makes people spend.</p>
+  <div class="body">
+    <div class="cols c4">
+      <div class="card"><div class="k">What it claims</div><div class="v acc">±11 pts</div>
+        <div class="n">A tight, confident, specific planning range</div></div>
+      <div class="card"><div class="k">How far off it typically is</div><div class="v bad">±164 pts</div>
+        <div class="n">About 14× wider than it admits</div></div>
+      <div class="card"><div class="k">How often it is actually right</div><div class="v bad">7%</div>
+        <div class="n">It tells you 80%. Truth lands inside about one launch in fourteen</div></div>
+      <div class="card hi"><div class="k">Brand Zero, same question</div><div class="v good">−5% to +91%</div>
+        <div class="n">Wider, and honest about it</div></div>
+    </div>
+    <div class="note" style="margin-top:26px">
+      <b>Why this matters more than any win we could show.</b> A wide honest answer sends the team to go and test. A narrow confident wrong one sends them to spend. Comics and probiotics do not share a price response — and a system that averages them together will never tell you so. Knowing when <i>not</i> to pool is not a feature of this system; it is the reason it exists.
+    </div>
+  </div>
+  <div class="foot"><b>Measured, not asserted:</b> hold-one-brand-out coverage for naive pooling lands at 0–5% across both decision classes in <b>backtest.py</b>.</div>
+</section>
+
+<!-- ══════════════════════════ 4 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">04</span><span class="rule"></span><span class="tag">The system</span></div>
+  <h1>Brand Zero <span class="dim">— four organs and one loop</span></h1>
+  <p class="sub">Nothing here asks anyone to change how they work. No one is asked to "log their decisions" — they won't. The system observes the decisions people were already making, from where they already make them.</p>
+  <div class="body">
+    <div class="cols c4" style="margin-bottom:24px">
+      <div class="card"><div class="k">1 · The Ledger</div><div class="v sm">Evidence,<br>not documents</div>
+        <div class="n">The atomic unit is a causal claim — what was tried, what moved, and how much we should believe it.</div></div>
+      <div class="card"><div class="k">2 · The Prior</div><div class="v sm">Learns what<br>transfers</div>
+        <div class="n">Pools across brands that are genuinely alike — and refuses when they aren't.</div></div>
+      <div class="card"><div class="k">3 · The Allocator</div><div class="v sm">Funds the<br>right test</div>
+        <div class="n">Spends the learning budget where the portfolio learns most, not where revenue is biggest.</div></div>
+      <div class="card hi"><div class="k">4 · Calibration</div><div class="v sm">Scores the<br>forecasters</div>
+        <div class="n">People and model both predict before launch, both scored after. Works at one brand.</div></div>
+    </div>
+    <div class="flow">
+      <div class="step"><div class="t">Decide</div><div class="d">The call that was happening anyway</div></div>
+      <div class="arw">→</div>
+      <div class="step"><div class="t">Log</div><div class="d">Extracted from ads, Shopify, Slack</div></div>
+      <div class="arw">→</div>
+      <div class="step"><div class="t">Pool</div><div class="d">Only where it earns it</div></div>
+      <div class="arw">→</div>
+      <div class="step"><div class="t">Predict</div><div class="d">Human and model, on record</div></div>
+      <div class="arw">→</div>
+      <div class="step"><div class="t">Test</div><div class="d">Funded by portfolio value</div></div>
+      <div class="arw">→</div>
+      <div class="step"><div class="t">Update</div><div class="d">Everyone's prior moves</div></div>
+    </div>
+  </div>
+  <div class="foot">All four organs are implemented and tested — <b>github.com/SatyamSingh-Git/brand-zero</b> · <code>python demo.py</code> runs the whole loop in ten seconds.</div>
+</section>
+
+<!-- ══════════════════════════ 5 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">05</span><span class="rule"></span><span class="tag">Organ 1 — the Ledger</span></div>
+  <h1>A claim, not a document. <span class="dim">And not all claims count the same.</span></h1>
+  <div class="body">
+    <div class="cols c2w">
+      <div>
+        <p class="sub" style="font-size:17px">Two decisions carry most of the weight, and both are the kind of thing a system gets wrong silently.</p>
+        <ul class="pts">
+          <li><b>Everything lands on one scale.</b> A price elasticity in face wash and one in a ₹4,000 device are not the same quantity. Effects arrive in whatever units the source used — a 1.19 conversion ratio, a 0.07 fractional change — and are converted to one common axis <i>before</i> anything is pooled. Skip this and the model does confident arithmetic on incompatible numbers.</li>
+          <li><b>Weak evidence still counts — it just counts less.</b> A randomised holdout and a line in a pricing meeting are both evidence. Each tier discounts how much a claim can move the answer. Nothing is thrown away; nothing weak can move a posterior on its own.</li>
+          <li><b>Every number traces back.</b> A claim without a link to its source is rejected by the schema. Any answer the system gives can be followed to the Slack message or spreadsheet row it came from, in two clicks.</li>
+        </ul>
+      </div>
+      <div>
+        <table>
+          <thead><tr><th>Where it came from</th><th>Counts as</th></tr></thead>
+          <tbody>
+            <tr><td class="lbl">Randomised holdout / clean A-B</td><td class="good">100%</td></tr>
+            <tr><td class="lbl">Geo split, time split</td><td>70%</td></tr>
+            <tr><td class="lbl">Before / after, no control</td><td>35%</td></tr>
+            <tr><td class="lbl">Correlational read</td><td>15%</td></tr>
+            <tr><td class="lbl">Said in a meeting</td><td class="bad">5%</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:20px">
+          <b>The same claim, two ways.</b> A pricing-meeting opinion with a nominal error of 0.40 enters the model at <b>1.79</b>. It is kept, it is auditable, and it cannot move the answer by itself.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><b>schema.py</b> — 208 lines. Most Slack messages are opinions, not causal claims; the extractor's first job is to reject.</div>
+</section>
+
+<!-- ══════════════════════════ 6 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">06</span><span class="rule"></span><span class="tag">Organ 2 — the Prior</span></div>
+  <h1>It works out which brands are alike. <span class="dim">Nobody tells it.</span></h1>
+  <p class="sub">Three levels — <b>portfolio → category → brand</b> — fit separately for each kind of decision. Two levels would assume the portfolio is homogeneous, which is the assumption the whole system exists to test.</p>
+  <div class="body">
+    <div class="cols c2">
+      <div>
+        <table>
+          <thead><tr><th>Does what one brand learned move belief about another?</th><th>Ad message</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr class="mark"><td>The Good Bug → SuperYou</td><td>0.17</td><td>0.04</td></tr>
+            <tr class="mark"><td>Amar Chitra Katha → Tinkle</td><td>0.16</td><td>0.01</td></tr>
+            <tr class="mark"><td>Neude → Beauty by Bie</td><td>0.18</td><td>0.02</td></tr>
+            <tr><td class="lbl">Tinkle → Neude</td><td>0.01</td><td>0.03</td></tr>
+            <tr><td class="lbl">The Good Bug → Broadway</td><td>−0.07</td><td>−0.01</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:18px">
+          Shaded rows are brands in the same category. <b>Nobody supplied these numbers</b> — they fall out of how alike the brands turned out to be once the evidence was pooled. That is why Tinkle → Neude is allowed to be zero.
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="k">Ad messages, within a category</div>
+          <div class="v good">Pools</div>
+          <div class="n">Neighbours remove 58% of the uncertainty — enough to plan against.</div>
+        </div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="k">Price ladders, same brands</div>
+          <div class="v bad">Declines</div>
+          <div class="n">Neighbours remove 6%. It returns a wide range and tells the team to run a real price test.</div>
+        </div>
+        <div class="note">
+          <b>The ceiling, stated plainly.</b> No amount of neighbour evidence pulls a new brand below how much brands genuinely differ. Transfer buys the distance from wide to narrow, and not one point further. A system claiming otherwise would be lying.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><b>model.py</b> — three-level partial pooling, numpy only, no dependencies beyond it. Correlations from posterior draws on Think9's real category structure.</div>
+</section>
+
+<!-- ══════════════════════════ 7 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">07</span><span class="rule"></span><span class="tag">The finding</span></div>
+  <h1>We built it, measured it, <span class="dim">and it contradicted our own pitch.</span></h1>
+  <p class="sub">The obvious chart for this deck is cost-per-correct-decision falling as brand number climbs. <b>The model does not produce that curve.</b> Portfolio size barely matters. What matters is how many <i>similar</i> brands a launching brand has.</p>
+  <div class="body">
+    <div class="cols c2w">
+      <div>
+        <div class="barrow"><span class="lb">0 similar brands</span><span class="track"><i style="width:100%;background:var(--blue)"></i></span><span class="vl">0.45</span></div>
+        <div class="barrow"><span class="lb">1</span><span class="track"><i style="width:52%;background:var(--blue)"></i></span><span class="vl">0.23</span></div>
+        <div class="barrow"><span class="lb">2</span><span class="track"><i style="width:46%;background:var(--blue)"></i></span><span class="vl">0.20</span></div>
+        <div class="barrow"><span class="lb">3</span><span class="track"><i style="width:44%;background:var(--blue)"></i></span><span class="vl">0.19</span></div>
+        <div class="barrow"><span class="lb">5</span><span class="track"><i style="width:41%;background:var(--blue)"></i></span><span class="vl">0.18</span></div>
+        <div class="barrow"><span class="lb">8</span><span class="track"><i style="width:41%;background:var(--blue)"></i></span><span class="vl">0.18</span></div>
+        <p style="font-size:13px;color:var(--muted);margin:6px 0 0">How much a launching brand still doesn't know. Lower is better.</p>
+      </div>
+      <div>
+        <div class="cols c2" style="height:auto;margin-bottom:16px">
+          <div class="card"><div class="k">First two similar brands</div><div class="v good">−54%</div>
+            <div class="n">uncertainty removed</div></div>
+          <div class="card"><div class="k">Growing 11 → 30 brands</div><div class="v">−12%</div>
+            <div class="n">uncertainty removed</div></div>
+        </div>
+        <div class="quote" style="font-size:22px">A house of brands compounds by going <span class="br">deeper into fewer categories</span>, not wider across more.</div>
+        <p class="sub" style="font-size:15px;margin-top:16px;margin-bottom:0">Five categories of six brands learns faster than thirty categories of one. Thirty brands spread across thirty categories is, for learning purposes, thirty startups sharing an office after all.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><b>cold_start.py</b> — one world per seed, grown progressively, target brand never observed, averaged over six worlds. The first version of this measurement was <b>wrong</b> (a fresh world drawn per size compares universes, not sizes) and produced a curve that wandered 58/38/52/31.</div>
+</section>
+
+<!-- ══════════════════════════ 8 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">08</span><span class="rule"></span><span class="tag">Organ 3 — the Allocator</span></div>
+  <h1>Fund the test the portfolio learns most from. <span class="dim">It is rarely the biggest brand.</span></h1>
+  <p class="sub">The constraint nobody designs around: <b>you can only run an experiment on a brand that is already live.</b> Pre-launch brands carry the most risk and have no way to test. So "which live brand should we test" has an answer nobody computes — test the live brand that is the best lens on the launches queued behind it, even when that brand is small.</p>
+  <div class="body">
+    <div class="cols c2w fill">
+      <div>
+        <table>
+          <thead><tr><th>Policy</th><th>Picks</th><th>Learning bought</th><th>To others</th></tr></thead>
+          <tbody>
+            <tr><td class="lbl">Biggest brand <span style="color:var(--muted)">(what happens today)</span></td><td>brand 01</td><td>₹0.01L</td><td>—</td></tr>
+            <tr><td class="lbl">Each P&amp;L optimises its own</td><td>brand 03</td><td>₹0.24L</td><td>0%</td></tr>
+            <tr class="mark"><td>Brand Zero</td><td>brand 00</td><td>₹1.87L</td><td>97%</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:14px;color:var(--ink2);line-height:1.55;margin:16px 0 0">
+          Brand Zero's pick ranks <b>25th of 25 by revenue at stake</b> — literally the last brand anyone would think to test. It wins because the brands it teaches cannot yet be tested at all.
+        </p>
+        <div class="note" style="margin-top:14px">
+          <b>The honest half.</b> Across 12 draws it picks a different test than "fund the biggest brand" in <b>5</b>. In the other 7, the flagship's own call happens to sit near its decision threshold and instinct is right. It earns its place on the draws where instinct is wrong, not by being different every time.
+        </div>
+      </div>
+      <div>
+        <div class="card hi" style="height:100%;display:flex;flex-direction:column;justify-content:center">
+          <div class="k">The governance that makes it shippable</div>
+          <p style="font-size:16px;line-height:1.6;color:var(--ink2);margin:6px 0 0">
+            Telling Brand 7's lead <i>"your budget went to Brand 12 for portfolio value"</i> gets this switched off inside a quarter. They carry a P&amp;L.<br><br>
+            <b style="color:var(--ink)">So the Allocator owns no brand budget.</b> It owns a small ring-fenced learning budget and <b style="color:var(--ink)">bids</b> — offering to fund tests inside brands. Brands opt in because it is free money.<br><br>
+            Same mathematics. Survivable politics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><b>allocator.py</b> — expected value of information by Gauss–Hermite quadrature. The cross-brand covariance it needs falls straight out of the fit; no second model.</div>
+</section>
+
+<!-- ══════════════════════════ 9 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">09</span><span class="rule"></span><span class="tag">Organ 4 — Calibration</span></div>
+  <h1>The one organ that pays at eleven brands. <span class="dim">And at one.</span></h1>
+  <p class="sub">Everything else needs neighbours before it works. This needs only that people write down what they expect <i>before</i> they find out — and get scored afterwards. The model forecasts too, on the same scale, scored the same way, with no special treatment.</p>
+  <div class="body">
+    <div class="cols c2w">
+      <div>
+        <table>
+          <thead><tr><th>Forecaster</th><th>Says 80%</th><th>Really is</th><th>Range width</th></tr></thead>
+          <tbody>
+            <tr class="mark"><td>Brand Zero</td><td>80%</td><td class="good">82%</td><td>0.25</td></tr>
+            <tr><td class="lbl">Lead A</td><td>80%</td><td class="good">90%</td><td>0.40</td></tr>
+            <tr><td class="lbl">Lead B</td><td>80%</td><td class="bad">5%</td><td>0.12</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:15px;color:var(--ink2);line-height:1.6;margin:18px 0 0">
+          <b style="color:var(--ink)">Lead B is not a worse operator.</b> They state 12-point ranges on a question that moves 60 points. The score notices. That is a conversation about uncertainty, not about judgement — and it needs no sibling brands, which is why it ships in <b style="color:var(--ink)">week one</b>.
+        </p>
+      </div>
+      <div>
+        <ul class="pts">
+          <li><b>It is a proper scoring rule.</b> Quoting enormous ranges to be safe costs you on width; quoting tight ones costs you on misses. Honest reporting is the way to win.</li>
+          <li><b>Within two quarters you know who is calibrated on what.</b> Not who is smart — who is well-calibrated on price versus creative versus channel. Those are different people.</li>
+          <li><b>It turns judgement into evidence.</b> A calibrated operator's opinion can enter the ledger with a defensible weight instead of a guessed one.</li>
+          <li><b>It is also the honesty mechanism.</b> When the system refuses to answer and an operator overrides it — which is often correct — the override automatically opens a prediction in their name. Overriding is free. Overriding without saying what you expect is not.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><b>calibration.py</b> — Winkler interval score. Ninety seconds per launch decision, and it is the only part of this that works before the portfolio grows.</div>
+</section>
+
+<!-- ══════════════════════════ 10 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">10</span><span class="rule"></span><span class="tag">Does it work</span></div>
+  <h1>Hold one brand out. <span class="dim">Predict it cold. Repeat for all of them.</span></h1>
+  <p class="sub">Remove every observation belonging to one brand, fit on the rest, predict it from nothing — exactly the position a brand is in on launch day. The number to watch is <b>coverage</b>: a range sold as 80% should contain the truth about 80% of the time.</p>
+  <div class="body">
+    <div class="cols c2">
+      <div>
+        <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px">Ad messages — a decision that transfers</p>
+        <table>
+          <thead><tr><th></th><th>Error</th><th>Coverage</th><th>Score</th></tr></thead>
+          <tbody>
+            <tr><td class="lbl">Each brand alone</td><td>0.53</td><td>90%</td><td>1.95</td></tr>
+            <tr><td class="lbl">One average for all</td><td>0.53</td><td class="bad">5%</td><td class="bad">4.31</td></tr>
+            <tr class="mark"><td>Brand Zero</td><td class="good">0.27</td><td>70%</td><td class="good">0.97</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px">Price ladders — a decision that does not</p>
+        <table>
+          <thead><tr><th></th><th>Error</th><th>Coverage</th><th>Score</th></tr></thead>
+          <tbody>
+            <tr><td class="lbl">Each brand alone</td><td>1.03</td><td>80%</td><td>3.86</td></tr>
+            <tr><td class="lbl">One average for all</td><td>1.01</td><td class="bad">0%</td><td class="bad">7.96</td></tr>
+            <tr class="mark"><td>Brand Zero</td><td>0.88</td><td>85%</td><td>3.07</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="note" style="margin-bottom:16px">
+          <b>The result we kept because it is unflattering.</b> On price ladders — the class that does not transfer — Brand Zero is close to level with a brand that starts cold, and on some seeds slightly behind it. It has nothing to add there and does not pretend to. A system that won everywhere would be the less believable one.
+        </div>
+        <div class="card">
+          <div class="k">What this does not show</div>
+          <p style="font-size:14px;line-height:1.6;color:var(--ink2);margin:4px 0 0">
+            <b style="color:var(--ink)">These numbers are synthetic.</b> The world they come from was generated with the same three-level structure the model fits. That demonstrates the mechanism; it is not evidence Think9's portfolio behaves this way.<br><br>
+            The protocol that would settle it is <b style="color:var(--ink)">this exact backtest pointed at the real ledger</b> — a week-3 measurement, and it is in the plan. If it comes back weak, that is a finding to act on, not to explain away.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><b>backtest.py</b> — runs in CI, not by hand, because an evaluation that runs when someone remembers stops running in week five.</div>
+</section>
+
+<!-- ══════════════════════════ 11 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">11</span><span class="rule"></span><span class="tag">Architecture</span></div>
+  <h1>Where claims come from, <span class="dim">and where humans decide.</span></h1>
+  <div class="body">
+    <div class="cols c3" style="height:auto">
+      <div>
+        <div class="k" style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--brand);margin-bottom:12px">Sources — all of them already exist</div>
+        <ul class="pts" style="font-size:15px">
+          <li style="font-size:15px;margin-bottom:9px"><b>Meta / Google Ads</b> — creative tests, the cleanest high-tier evidence</li>
+          <li style="font-size:15px;margin-bottom:9px"><b>Shopify, Amazon, Flipkart</b> — price, pack, cohort revenue</li>
+          <li style="font-size:15px;margin-bottom:9px"><b>Slack, meeting transcripts, vendor WhatsApp</b> — the reasoning no dashboard holds</li>
+          <li style="font-size:15px;margin-bottom:0"><b>Broadway &amp; Brand Bridge</b> — 350+ third-party brands and 10k+ stores Think9 observes but does not own. <b>The answer to cold start:</b> the prior for brand 12 need not come only from eleven brands.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="k" style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--brand);margin-bottom:12px">Agents — one job each</div>
+        <ul class="pts" style="font-size:15px">
+          <li style="font-size:15px;margin-bottom:9px"><b>Extractors</b> — Claude with the claim schema as a forced output format, so a malformed claim is impossible. First job is to <i>reject</i>.</li>
+          <li style="font-size:15px;margin-bottom:9px"><b>Adjudicator</b> — dedupes, resolves conflicts, assigns the evidence tier</li>
+          <li style="font-size:15px;margin-bottom:9px"><b>Prior service</b> — nightly refit, per decision class</li>
+          <li style="font-size:15px;margin-bottom:9px"><b>Query agent</b> — answers in Slack, cites its claims, refuses when it should</li>
+          <li style="font-size:15px;margin-bottom:0"><b>Allocator</b> — weekly ranked bid list. Never moves money.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="k" style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--brand);margin-bottom:12px">Human checkpoints — six</div>
+        <ul class="pts" style="font-size:15px">
+          <li style="font-size:15px;margin-bottom:9px"><b>Claim confirmation</b> — brand lead, one click. Ignored → enters one tier <i>lower</i>.</li>
+          <li style="font-size:15px;margin-bottom:9px"><b>Tier promotion</b> — only a named human can call something randomised. Tiers fall automatically; they never rise.</li>
+          <li style="font-size:15px;margin-bottom:9px"><b>Refusal override</b> — allowed, logged, opens a prediction</li>
+          <li style="font-size:15px;margin-bottom:9px"><b>Experiment funding</b> — weekly council. Nothing funded by inaction.</li>
+          <li style="font-size:15px;margin-bottom:9px"><b>Pre-registration</b> — the one hard gate, above a spend threshold</li>
+          <li style="font-size:15px;margin-bottom:0"><b>Audit</b> — any number, back to its source, in two clicks</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-top:20px">
+      <b>Each checkpoint specifies what happens by default if nobody acts</b> — because in practice most checkpoints resolve by default, and a design that ignores that is decoration. <b>Stack:</b> Postgres · Airbyte · Claude with structured outputs · numpy · Prefect · FastAPI + Slack. Deliberately no RAG and no vector store — the unit is a typed claim and the retrieval key is structured, so a semantic layer would be reaching for a familiar tool rather than the right one.
+    </div>
+  </div>
+  <div class="foot">Full detail: <b>docs/architecture.md</b></div>
+</section>
+
+<!-- ══════════════════════════ 12 ══════════════════════════ -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">12</span><span class="rule"></span><span class="tag">30 days</span></div>
+  <h1>Sequenced by what pays at eleven brands — <span class="dim">so pooling ships third.</span></h1>
+  <div class="body">
+    <div class="cols c2w">
+      <div>
+        <div class="lane"><div class="wk">Week 1</div><div>
+          <div class="t">The ledger exists, and pre-registration goes live</div>
+          <div class="d">One Postgres table. <b>20–30 past decisions backfilled by hand</b> by someone who was in the room — the most valuable day of the month, and it involves no AI. A Slack <code>/predict</code> command.</div></div></div>
+        <div class="lane"><div class="wk">Week 2</div><div>
+          <div class="t">Two extractors, and the first fit</div>
+          <div class="d">Meta Ads and Shopify. Adjudicator plus the confirmation card. <b>Expect the first fit to be uninformative</b> — at this size wide intervals are the correct answer. Shipping it proves the pipeline, not the numbers.</div></div></div>
+        <div class="lane"><div class="wk">Week 3</div><div>
+          <div class="t">The honest measurement</div>
+          <div class="d">Hold-one-brand-out against the <b>real</b> ledger. The query surface in Slack, refusal path included. This is the week the thesis gets tested.</div></div></div>
+        <div class="lane"><div class="wk">Week 4</div><div>
+          <div class="t">Allocation, and the calibration leaderboard</div>
+          <div class="d">Ring-fenced budget agreed with finance; first council. One experiment funded that no single P&amp;L would have paid for.</div></div></div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="k">Deliberately not built in 30 days</div>
+          <p style="font-size:14px;line-height:1.6;color:var(--ink2);margin:4px 0 0">
+            WhatsApp and transcript extraction · quick-commerce ingestion · Broadway as a prior source · <b style="color:var(--ink)">anything autonomous</b> · cross-category transfer, because the model will almost certainly say it does not transfer and building for it before measuring would be exactly the mistake this system prevents.<br><br>
+            <i>A roadmap without exclusions is a wish.</i>
+          </p>
+        </div>
+        <div class="card hi">
+          <div class="k">How to tell whether it worked, at day 30</div>
+          <p style="font-size:14px;line-height:1.6;color:var(--ink2);margin:4px 0 0">
+            1 · Is the ledger fed without being chased?<br>
+            2 · Is anyone calibrated? <span style="color:var(--muted)">Even one miscalibrated operator identified is worth the month.</span><br>
+            3 · Does it beat starting cold on <b style="color:var(--ink)">real</b> claims? <span style="color:var(--muted)">If not, say so.</span><br>
+            4 · Did the Allocator fund something nobody else would have?
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot">North-star metric: <b>cost per validated learning</b> — rupees spent per decision moved from "we're guessing" to "we know." Measurable from the ledger the day it exists. Full plan: <b>docs/roadmap-30-day.md</b></div>
+</section>
+
+<!-- ══════════════════════════ 13 ══════════════════════════ -->
+<section class="slide cover" style="background:#fff">
+  <div class="kicker">In closing</div>
+  <h2 class="line" style="font-size:44px;max-width:24ch">Every other asset in the portfolio depreciates. <em>Brand Zero appreciates with every launch.</em></h2>
+  <p style="font-size:18px;line-height:1.65;color:var(--ink2);max-width:60ch;margin:0 0 30px">
+    Inventory, creative, packaging tooling — even the brands themselves. Competitors can buy the same models tomorrow. They cannot buy eleven correlated brands' worth of pre-registered predictions and measured outcomes.<br><br>
+    And the honest version of the promise: at eleven brands the ledger and the calibration layer carry the value, pooling compounds later, and the system's most useful habit is telling you when it has nothing to add.
+  </p>
+  <div style="display:flex;gap:44px;font-size:14px;color:var(--ink2);line-height:1.7">
+    <div><b style="color:var(--ink)">Code &amp; tests</b><br>github.com/SatyamSingh-Git/brand-zero<br><span style="color:var(--muted)">python demo.py · python cold_start.py</span></div>
+    <div><b style="color:var(--ink)">Interactive</b><br>sim/index.html — one file, no install<br><span style="color:var(--muted)">Four steps, about two minutes</span></div>
+    <div><b style="color:var(--ink)">Detail</b><br>docs/architecture.md<br>docs/roadmap-30-day.md</div>
+  </div>
+</section>
