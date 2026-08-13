@@ -36,8 +36,23 @@
   .thesis{font-size:32px;line-height:1.25;font-weight:640;letter-spacing:-0.022em;
      margin:0 0 16px;max-width:26ch}
   .thesis .dim{color:var(--muted);font-weight:400}
+  .intro{font-size:15.5px;line-height:1.68;color:var(--ink-2);max-width:74ch;margin:0 0 26px}
+  .intro p{margin:0 0 14px}
+  .intro b{color:var(--ink);font-weight:650}
+
   .note{font-size:12.5px;color:var(--ink-2);background:var(--wash-warn);
      border:1px solid #f0e4d0;border-radius:8px;padding:10px 14px;margin-bottom:36px}
+
+  .howto{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:22px 26px 24px;box-shadow:var(--shadow);margin-bottom:26px}
+  .howto-h{font-size:11.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 18px}
+  .howto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+  .howto-item{font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+  .howto-item .sw{display:inline-block;width:22px;height:3px;border-radius:2px;
+    vertical-align:middle;margin-right:9px}
+  .howto-item b{color:var(--ink);font-weight:650}
+  .howto-item span{display:block;margin-top:6px}
 
   /* ---- guided story ---- */
   .steps{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
@@ -161,7 +176,40 @@
 
 <p class="eyebrow">Brand Zero</p>
 <p class="thesis">Thirty brands under one roof should learn faster than thirty startups. <span class="dim">Here is what that is actually worth.</span></p>
+<div class="intro">
+  <p><b>In 30 seconds.</b> Think9 has eleven brands and is building toward thirty. The bet behind
+  a house of brands is that each new one launches smarter than the last, because the ones before
+  it already learned something. Today that learning travels between brands through people in
+  meetings &mdash; which is slow, lossy, and stops working somewhere around brand seven.</p>
+
+  <p><b>Brand Zero</b> is a shared memory for the portfolio. A new brand starts from what the
+  existing brands have actually measured, instead of from nothing. Just as importantly, it says
+  plainly when the other brands are <em>no help</em> &mdash; which, for a portfolio running from
+  probiotics to comics to apparel, is often.</p>
+
+  <p><b>What this page is.</b> One real launch decision, walked through four times: the brand
+  deciding alone, the brand learning from its neighbours, the same brand asking a question its
+  neighbours cannot answer, and what a generic company-wide AI would have told it. Click the four
+  steps in order &mdash; it takes about two minutes. Everything below the walkthrough is optional
+  detail.</p>
+</div>
+
 <div class="note">Brand names are Think9's real portfolio, public as of 13 Aug 2026. Every effect size is <strong>synthetic</strong> — Think9's performance data is not public and is not used here.</div>
+
+<div class="howto">
+  <p class="howto-h">Three ways a new brand can decide, compared throughout</p>
+  <div class="howto-grid">
+    <div class="howto-item"><i class="sw" style="background:#1baf7a"></i>
+      <b>Each brand alone</b>
+      <span>How it works today. Brand 12 runs its own tests and learns nothing from the eleven before it.</span></div>
+    <div class="howto-item"><i class="sw" style="background:#eb6834"></i>
+      <b>One average for every brand</b>
+      <span>A single company-wide number applied to all eleven brands regardless of category. This is what most "central AI brain" proposals actually are.</span></div>
+    <div class="howto-item"><i class="sw" style="background:#2a78d6"></i>
+      <b>Brand Zero</b>
+      <span>Learn only from the brands that are genuinely similar &mdash; and say so plainly when none of them are.</span></div>
+  </div>
+</div>
 
 <div class="steps" id="steps"></div>
 <div class="stage">
@@ -171,16 +219,16 @@
 </div>
 
 <div class="panel">
-  <p class="ptitle">The same thing, as a curve</p>
-  <p class="psub">How much a launching brand still doesn't know, against how many brands in its category have already been measured. The marker is where the story above is sitting.</p>
+  <p class="ptitle">The same thing, as a picture</p>
+  <p class="psub">The taller the line, the less the new brand knows. Left edge: it has no similar brands to learn from. Right edge: it has eight. Drag the control to move the marker and watch how fast the gain runs out.</p>
   <div class="krow">
-    <label for="s_k">Siblings already measured <span class="v" id="v_k">2</span></label>
+    <label for="s_k">Similar brands already measured <span class="v" id="v_k">2</span></label>
     <input type="range" id="s_k" min="0" max="8" step="1" value="2">
   </div>
   <div class="legend" id="legend"></div>
   <figure>
     <div class="cscroll"><svg id="c1" viewBox="0 0 700 330" role="img"
-      aria-label="Uncertainty a launching brand inherits, against siblings measured in its category"></svg></div>
+      aria-label="How much a launching brand still does not know, against how many similar brands have already been measured"></svg></div>
     <figcaption id="cap1"></figcaption>
   </figure>
 
@@ -190,8 +238,8 @@
   </details>
 </div>
 
-<h2>Ask it about a real brand</h2>
-<p class="sub">The answer that matters most is the one where it refuses.</p>
+<h2>Try it on any of the eleven brands</h2>
+<p class="sub">Pick a brand and a decision. The answer worth reading is the one where it refuses to help.</p>
 <div class="panel" style="margin-top:0">
   <div style="display:flex;gap:11px;flex-wrap:wrap;align-items:center">
     <select id="qBrand"></select>
@@ -203,18 +251,19 @@
   <div id="answer"></div>
 </div>
 
-<h2>What a naive version would have told you</h2>
-<p class="sub">One pooled average over all eleven brands &mdash; the shape most "central intelligence layer" proposals quietly take. It does not reduce error at all; its estimate is still the portfolio mean. It only shrinks the <em>stated</em> uncertainty, which is the part that gets people to act.</p>
+<h2>Why the confident version is the dangerous one</h2>
+<p class="sub">Averaging all eleven brands together does not make the answer any more accurate &mdash; the estimate is still just the portfolio average. What it does is make the answer <em>sound</em> certain. And certainty is the part that makes people spend.</p>
 <div class="tiles" id="tiles"></div>
 
 <h2>The rupee case, with the assumptions exposed</h2>
 <p class="sub">No access to Think9's numbers, so this is a Fermi estimate and every input is a slider. Change them and see whether the case survives.</p>
 <div class="panel" style="margin-top:0;margin-bottom:16px"><div class="grid" id="controls2" style="padding-top:4px"></div></div>
 <div class="tiles" id="money"></div>
+<p class="sub" id="moneyNote" style="margin-top:16px"></p>
 
 <h2>Where the compounding actually is</h2>
 <div class="tiles" id="compare"></div>
-<p class="sub" style="margin-top:16px">Both are variance reduction for a brand about to launch. The sibling figure is computed live from the sliders. The portfolio figure is <em>measured</em> — by fitting the full model to simulated histories at each size and averaging over six worlds. The closed form driving this page treats the transfer structure as known, so it would understate it. Source: <code>cold_start.py</code>.</p>
+<p class="sub" style="margin-top:16px">Both are variance reduction for a brand about to launch. The similar-brands figure is computed live from the controls. The portfolio figure is <em>measured</em> — by fitting the full model to simulated histories at each size and averaging over six worlds. The closed form driving this page treats the transfer structure as known, so it would understate it. Source: <code>cold_start.py</code>.</p>
 
 <h2>The numbers behind the curve</h2>
 <div class="panel" style="margin-top:0"><table id="tbl"></table></div>
@@ -285,24 +334,24 @@ const P={tauB:0.22,tauC:0.35,se:0.15,nTests:2,k:2,nBrands:11,
 const STEPS=[
  {name:"1. A brand on its own",
   set:{k:0,tauB:0.22},
-  scene:`Think9 is launching its twelfth brand. It sits in <b>ingestible wellness</b>, alongside The Good Bug, SuperYou and Panchamrit &mdash; but nothing has been measured for it yet. The team has to pick a creative hook and commit budget behind it.`,
-  take:`Starting alone, the honest planning range spans <b>{RANGE}</b>. That is not a bad team &mdash; it is what one launch knows before it has run anything. Every rupee behind that decision is exposed to the width of that range.`},
+  scene:`Think9 is launching its twelfth brand, in <b>ingestible wellness</b> &mdash; the category The Good Bug, SuperYou and Panchamrit are already in. The team has to pick the message for its launch ads and put budget behind it. They believe it will lift sales about 35%.<br><br>Nobody has tested anything for this brand yet. So how sure can they actually be?`,
+  take:`Not very. They would plan for a 35% lift, but on the evidence available the truth could be anything from <b>{LO} to {HI}</b> &mdash; a campaign that loses money, or one that nearly doubles sales. Both are consistent with what they know. That uncertainty is not incompetence; it is simply what a first launch knows, and every rupee of the budget is exposed to it.`},
 
- {name:"2. Give it its siblings",
+ {name:"2. Let it learn from similar brands",
   set:{k:2,tauB:0.22},
-  scene:`Now let the new brand inherit what its two measured siblings already learned about creative hooks in this category &mdash; without running a single test of its own.`,
-  take:`The same decision, the same budget, and the range tightens to <b>{RANGE}</b>. Money at risk falls from {EOL0} to <b>{EOL}</b> before the brand spends anything. <b>This is the entire house-of-brands thesis, and this is its size.</b>`},
+  scene:`Now let the new brand start from what The Good Bug, SuperYou and Panchamrit already learned about ad messages in this category &mdash; without running a single test of its own.`,
+  take:`The same decision and the same budget, but the honest answer narrows to <b>{LO} to {HI}</b>. The downside case is largely gone. Put in money: the expected cost of getting this call wrong falls from {EOL0} to <b>{EOL}</b>, before the brand has spent anything at all. <b>That gap is the house-of-brands thesis, and that is its actual size.</b>`},
 
  {name:"3. Now ask it about price",
   set:{k:2,tauB:0.70},
-  scene:`Same portfolio, same siblings, different question: what should the price ladder be? Price response is driven by each brand's own positioning and SKU architecture rather than by the category.`,
-  take:`Barely moves &mdash; <b>{RANGE}</b>. Siblings cut the variance only <b>{CUT}</b>, under the 40% bar, so the system declines to pool and tells the brand to test instead. <b>Knowing when not to transfer is the feature</b>; a system that answered both questions with equal confidence would be wrong half the time and never say so.`},
+  scene:`Same brand, same three neighbours, different question: <b>what should it charge?</b><br><br>How customers react to price depends on a brand's own positioning and pack sizes far more than on its category. So does knowing what The Good Bug charges actually help?`,
+  take:`Hardly at all. The answer stays wide at <b>{LO} to {HI}</b> &mdash; the neighbours removed only <b>{CUT}</b> of the uncertainty, well under the bar the system needs to clear. So it refuses to answer confidently and tells the team to run a real price test instead. <b>Knowing when its neighbours are no help is the point.</b> A system that answered both questions with the same confidence would be wrong often, and would never warn you.`},
 
- {name:"4. What a naive version says",
+ {name:"4. What a generic AI would say",
   set:{k:2,tauB:0.22},
   naive:true,
-  scene:`One pooled average across all eleven brands, ignoring categories entirely. This is the shape a generic "central brain" takes when nobody asks whether the brands are alike.`,
-  take:`It reports a range of <b>{NRANGE}</b> &mdash; tight, confident, and wrong. Its actual error is {NACT} wider, so the interval it sells as 80% really covers <b>{NCOV}</b>, about one launch in {NONE}. <b>That is worse than having built nothing:</b> a wide honest range at least tells you to go and test.`},
+  scene:`Now the version most "central AI brain" proposals actually build: average everything across all eleven brands and serve one number, without asking whether a comics business and a probiotics business are alike.<br><br>It looks far more impressive. Ask it the same launch question.`,
+  take:`It answers <b>{NRANGE}</b> &mdash; narrow, confident and specific. It is also wrong. Its real error is about {NACT} wider than it admits, so a range it presents as "we're 80% sure" actually contains the truth <b>{NCOV}</b> of the time &mdash; roughly one launch in {NONE}. <b>This is worse than building nothing.</b> A wide honest answer at least sends the team to go and test. A narrow confident wrong one sends them to spend.`},
 ];
 let active=0;
 
@@ -323,10 +372,10 @@ document.getElementById("steps").addEventListener("click",e=>{
 
 // ---------------------------------------------------------------- sliders --
 const SLIDERS=[
- ["tauB","How different brands are inside a category",0.05,0.8,0.01,"","τ-brand: the floor no sibling data can beat"],
+ ["tauB","How different brands are inside a category",0.05,0.8,0.01,"","the limit no amount of shared learning can beat"],
  ["tauC","How far apart categories are",0.05,0.8,0.01,"","τ-category"],
  ["se","Precision of one past test",0.05,0.4,0.01,"","standard error of a claim in the ledger"],
- ["nTests","Tests per sibling",1,6,1,"","how much history each sibling carries"],
+ ["nTests","Tests each of them has run",1,6,1,"","how much history each similar brand carries"],
  ["nBrands","Portfolio size",4,40,1,"","Think9 today: 11"],
 ];
 const SLIDERS2=[
@@ -378,7 +427,7 @@ function lineChart(svg,W,H,series,xs,xlab,ylab,floor,markX){
     +`<text class="alab" transform="translate(12,${M.t+ih/2}) rotate(-90)" text-anchor="middle">${ylab}</text>`;
   if(floor!=null)
     o+=`<line class="floor" x1="${M.l}" y1="${Y(floor).toFixed(1)}" x2="${M.l+iw}" y2="${Y(floor).toFixed(1)}"/>`
-      +`<text class="floorlab" x="${M.l+7}" y="${(Y(floor)-7).toFixed(1)}">the floor — no amount of sibling data gets below this</text>`;
+      +`<text class="floorlab" x="${M.l+7}" y="${(Y(floor)-7).toFixed(1)}">however similar they are, brands still differ — this is that limit</text>`;
   series.forEach(s=>{
     const d=s.pts.map((p,i)=>`${i?"L":"M"}${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join("");
     o+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.25" stroke-linecap="round"${s.dash?' stroke-dasharray="5 4"':''}/>`;
@@ -394,7 +443,7 @@ function lineChart(svg,W,H,series,xs,xlab,ylab,floor,markX){
       const x=X(markX), y=Y(mainPt[1]);
       o+=`<line class="mark" x1="${x.toFixed(1)}" y1="${M.t}" x2="${x.toFixed(1)}" y2="${M.t+ih}"/>`
         +`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6.5" fill="${series[0].color}" stroke="var(--surface)" stroke-width="2.5"/>`;
-      const tx=`${markX} sibling${markX===1?"":"s"}`, w=tx.length*6.6+16;
+      const tx=`${markX} similar brand${markX===1?"":"s"}`, w=tx.length*6.6+16;
       const bx=Math.min(Math.max(x-w/2,M.l+1),M.l+iw-w-1);
       o+=`<rect class="markbox" x="${bx.toFixed(1)}" y="${M.t-1}" width="${w.toFixed(1)}" height="21" rx="5"/>`
         +`<text class="marktx" x="${(bx+w/2).toFixed(1)}" y="${M.t+14}" text-anchor="middle">${tx}</text>`;
@@ -404,7 +453,7 @@ function lineChart(svg,W,H,series,xs,xlab,ylab,floor,markX){
 }
 
 // ----------------------------------------------------------------- render --
-const SER=[["Brand Zero","--s1"],["naive (claimed)","--s2"],["siloed","--s3"]];
+const SER=[["Brand Zero","--s1"],["one average for every brand","--s2"],["each brand alone","--s3"]];
 const cvar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
 function rangeText(sd){
@@ -424,18 +473,18 @@ function render(){
   const svg1=document.getElementById("c1"); svg1.dataset.fmt="pp";
   lineChart(svg1,700,330,[
     {name:"Brand Zero",color:C[0],pts:rows.map(r=>[r.k,width(r.bz)])},
-    {name:"naive (claimed)",color:C[1],dash:true,pts:rows.map(r=>[r.k,width(r.naiveClaimed)])},
-    {name:"siloed",color:C[2],pts:rows.map(r=>[r.k,width(r.silo)])},
-  ],ks,"brands in the same category that have already been measured",
-    "how wide the planning range is (percentage points)",width(P.tauB),P.k);
+    {name:"one average",color:C[1],dash:true,pts:rows.map(r=>[r.k,width(r.naiveClaimed)])},
+    {name:"each alone",color:C[2],pts:rows.map(r=>[r.k,width(r.silo)])},
+  ],ks,"how many similar brands have already been measured",
+    "how unsure the new brand is",width(P.tauB),P.k);
 
   const cur=solve(P), zero=solve({...P,k:0});
   const cut2=100*(1-rows[2].bz/rows[0].bz), cut8=100*(1-rows[8].bz/rows[2].bz);
   document.getElementById("cap1").innerHTML=
-    `Lower is better. With no siblings the plan spans <strong>${width(rows[0].bz).toFixed(0)} points</strong>; `+
-    `two siblings bring it to <strong>${width(rows[2].bz).toFixed(0)}</strong>, and all eight only to `+
+    `Lower is better. With nothing to learn from, the range of possible outcomes spans <strong>${width(rows[0].bz).toFixed(0)} percentage points</strong>; `+
+    `two similar brands bring it to <strong>${width(rows[2].bz).toFixed(0)}</strong>, and all eight only to `+
     `<strong>${width(rows[8].bz).toFixed(0)}</strong> — nearly all of the gain arrives with the first two. `+
-    `The orange line is what naive pooling <em>claims</em>; its real error never leaves the green line.`;
+    `The orange line is what a one-average-for-everything system <em>claims</em> to know; its real accuracy never leaves the green line.`;
 
   // ---- the stage ----
   const S=STEPS[active];
@@ -447,8 +496,10 @@ function render(){
   const varCut=100*(1-(cur.bz*cur.bz)/(cur.silo*cur.silo));
 
   document.getElementById("scene").innerHTML=S.scene;
+  const loT=showPct(pct(P.effect-1.2816*cur.bz)), hiT=showPct(pct(P.effect+1.2816*cur.bz));
   document.getElementById("takeaway").innerHTML=S.take
-    .replace("{RANGE}",rangeText(S.naive?cur.bz:cur.bz))
+    .replace("{LO}",loT).replace("{HI}",hiT)
+    .replace("{RANGE}",rangeText(cur.bz))
     .replace("{EOL0}",L(eSilo)).replace("{EOL}",L(eNow))
     .replace("{CUT}",varCut.toFixed(0)+"%")
     .replace("{NRANGE}",rangeText(cur.naiveClaimed))
@@ -462,33 +513,33 @@ function render(){
   let hero;
   if (S.naive) {
     hero=[
-      ["what it claims","±"+width(cur.naiveClaimed).toFixed(0)+" pts","accent","its stated 80% planning range"],
+      ["the answer it gives",rangeText(cur.naiveClaimed),"accent","confident and precise"],
       ["→"],
-      ["what it actually is","±"+width(cur.naiveActual).toFixed(0)+" pts","bad","its estimate is still the portfolio mean"],
+      ["how wrong it can be",rangeText(cur.naiveActual),"bad","its real spread, roughly "+(cur.naiveActual/cur.naiveClaimed).toFixed(0)+"× wider"],
       ["→"],
-      ["so its “80%” really covers",(100*cov).toFixed(0)+"%","bad","about one launch in "+(cov>0.001?Math.round(1/cov):"—")],
+      ["how often it is right",(100*cov).toFixed(0)+"%","bad","it claims 80%"],
     ];
   } else if (active===0) {
     hero=[
-      ["planning range, on its own",rangeText(cur.bz),"",width(cur.bz).toFixed(0)+" points wide"],
+      ["what the lift could really be",rangeText(cur.bz),"","they would plan for "+showPct(pct(P.effect))],
       ["→"],
-      ["money at risk on the call",L(eNow),"","expected cost of getting it wrong"],
+      ["cost of getting this call wrong",L(eNow),"","on "+"₹"+P.stakes+"L riding on it"],
     ];
   } else if (active===2) {
     hero=[
-      ["planning range, on its own",rangeText(zero.bz),"","no siblings"],
+      ["knowing nothing",rangeText(zero.bz),"","the brand on its own"],
       ["→"],
-      ["with all its siblings",rangeText(cur.bz),"bad","barely moved"],
+      ["after asking its neighbours",rangeText(cur.bz),"bad","barely any narrower"],
       ["→"],
-      ["variance the siblings removed",varCut.toFixed(0)+"%","bad","under the 40% bar, so it declines"],
+      ["uncertainty they removed",varCut.toFixed(0)+"%","bad","too little to rely on \u2014 it declines"],
     ];
   } else {
     hero=[
-      ["planning range, on its own",rangeText(zero.bz),"",width(zero.bz).toFixed(0)+" points wide"],
+      ["on its own",rangeText(zero.bz),"","knowing nothing"],
       ["→"],
-      ["forked from its siblings",rangeText(cur.bz),"ok",width(cur.bz).toFixed(0)+" points, nothing spent"],
+      ["starting from its neighbours",rangeText(cur.bz),"ok","nothing spent to get here"],
       ["→"],
-      ["money at risk on the call",L(eNow),"ok","was "+L(eSilo)+" on its own"],
+      ["cost of getting it wrong",L(eNow),"ok","was "+L(eSilo)+" on its own"],
     ];
   }
   // The numbers stack vertically in a side panel now, so the horizontal arrow
@@ -500,33 +551,40 @@ function render(){
 
   // ---- naive tiles ----
   document.getElementById("tiles").innerHTML=`
-    <div class="tile"><div class="k">naive pool says its 80% interval is</div>
-      <div class="v">±${(1.2816*cur.naiveClaimed).toFixed(2)}</div><div class="n">standardized effect scale</div></div>
-    <div class="tile"><div class="k">its actual typical error is</div>
+    <div class="tile"><div class="k">how precise it claims to be</div>
+      <div class="v">±${(1.2816*cur.naiveClaimed).toFixed(2)}</div><div class="n">the range it hands the team</div></div>
+    <div class="tile"><div class="k">how far off it typically is</div>
       <div class="v bad">±${(1.2816*cur.naiveActual).toFixed(2)}</div>
       <div class="n">${(cur.naiveActual/cur.naiveClaimed).toFixed(0)}× wider than advertised</div></div>
-    <div class="tile"><div class="k">so that "80%" interval really covers</div>
+    <div class="tile"><div class="k">how often it is actually right</div>
       <div class="v bad">${(100*cov).toFixed(0)}%</div>
-      <div class="n">about one launch in ${cov>0.001?Math.round(1/cov):"—"}</div></div>
-    <div class="tile"><div class="k">Brand Zero, same inputs</div>
-      <div class="v ok">±${(1.2816*cur.bz).toFixed(2)}</div><div class="n">wider, and honest about it</div></div>`;
+      <div class="n">it tells you 80%; really about one launch in ${cov>0.001?Math.round(1/cov):"—"}</div></div>
+    <div class="tile"><div class="k">Brand Zero, same question</div>
+      <div class="v ok">±${(1.2816*cur.bz).toFixed(2)}</div><div class="n">a wider answer, and an honest one</div></div>`;
 
   // ---- money ----
   const saved=eSilo-eNow, cost=P.cost*1e5;
   document.getElementById("money").innerHTML=`
-    <div class="tile"><div class="k">decision risk, starting cold</div><div class="v">${L(eSilo)}</div>
-      <div class="n">expected cost of calling it wrong</div></div>
-    <div class="tile"><div class="k">decision risk, forked from Brand Zero</div><div class="v">${L(eNow)}</div>
-      <div class="n">same decision, inherited prior</div></div>
-    <div class="tile"><div class="k">removed per launch, before spending anything</div>
-      <div class="v ok">${L(saved)}</div><div class="n">across ${P.nBrands} brands: ${L(saved*P.nBrands)}</div></div>
-    <div class="tile"><div class="k">a test costs</div><div class="v">${L(cost)}</div>
-      <div class="n">${saved>cost?"less than the risk the prior removes for free":"more than the prior removes for free"}</div></div>`;
+    <div class="tile"><div class="k">cost of a wrong call, deciding alone</div><div class="v">${L(eSilo)}</div>
+      <div class="n">what the brand risks with no help</div></div>
+    <div class="tile"><div class="k">cost of a wrong call, using Brand Zero</div><div class="v">${L(eNow)}</div>
+      <div class="n">same decision, ${P.k} similar brand${P.k===1?"":"s"} to learn from</div></div>
+    <div class="tile"><div class="k">saved on every launch, for free</div>
+      <div class="v ${saved>0?"ok":""}">${L(saved)}</div>
+      <div class="n">across ${P.nBrands} brands: ${L(saved*P.nBrands)}</div></div>
+    <div class="tile"><div class="k">what one real test would cost</div><div class="v">${L(cost)}</div>
+      <div class="n">${saved>cost?"more than a test, and it costs nothing":"less than a test would remove"}</div></div>`;
+  document.getElementById("moneyNote").innerHTML = P.k===0
+    ? `<b>Both figures are the same right now</b>, because the control under the chart is
+       at zero &mdash; with no similar brands measured there is nothing to inherit. Move it up and
+       the second figure falls.`
+    : `Assumes the new brand has <b>${P.k} similar brand${P.k===1?"":"s"}</b> to learn from, set by
+       the slider under the chart above.`;
 
   // ---- compounding ----
   const vc=(a,b)=>100*(1-(a*a)/(b*b));
   document.getElementById("compare").innerHTML=`
-    <div class="tile"><div class="k">giving a new brand its first two siblings</div>
+    <div class="tile"><div class="k">giving a new brand its first two similar brands</div>
       <div class="v ok">−${vc(rows[2].bz,rows[0].bz).toFixed(0)}%</div>
       <div class="n">variance, live from the sliders</div></div>
     <div class="tile"><div class="k">growing the portfolio from 11 brands to 30</div>
@@ -536,7 +594,7 @@ function render(){
       <div class="n">Five categories of six brands learns faster than thirty categories of one. Thirty brands across thirty categories is, for learning purposes, thirty startups sharing an office.</div></div>`;
 
   document.getElementById("tbl").innerHTML=
-    `<thead><tr><th>siblings measured</th><th>Brand Zero</th><th>naive (claimed)</th><th>naive (actual)</th><th>siloed</th></tr></thead><tbody>`
+    `<thead><tr><th>similar brands measured</th><th>Brand Zero</th><th>one average (claims)</th><th>one average (really)</th><th>each alone</th></tr></thead><tbody>`
     +rows.map(r=>`<tr class="${r.k===P.k?"here":""}"><td>${r.k}</td><td>${r.bz.toFixed(3)}</td><td>${r.naiveClaimed.toFixed(3)}</td><td>${r.naiveActual.toFixed(3)}</td><td>${r.silo.toFixed(3)}</td></tr>`).join("")
     +`</tbody>`;
 
@@ -563,15 +621,15 @@ function renderAnswer(){
   document.getElementById("answer").innerHTML=`
     <div class="verdict ${ok?"yes":"no"}">
       <div style="font-weight:650;margin-bottom:7px">${ok?"It pools.":"It declines to pool."}</div>
-      ${ok?`Siblings cut the variance <strong>${(100*drop).toFixed(0)}%</strong>, clearing the 40% bar.
+      ${ok?`Its neighbours remove <strong>${(100*drop).toFixed(0)}%</strong> of the uncertainty, enough to rely on.
             Plan on <strong>${rangeText(s.bz)}</strong>.`
-          :`Siblings cut the variance only <strong>${(100*drop).toFixed(0)}%</strong>, under the 40% bar.
-            It returns a wide range and a recommendation to test rather than a confident number.
-            ${cls==="price_ladder"?"Price response is dominated by each brand's own positioning and SKU architecture, so a sibling's ladder tells you comparatively little.":""}`}
+          :`Its neighbours remove only <strong>${(100*drop).toFixed(0)}%</strong> of the uncertainty &mdash; not enough to lean on.
+            So it gives a wide range and tells the team to run a real test instead of handing over a confident number.
+            ${cls==="price_ladder"?"Price response is dominated by each brand's own positioning and SKU architecture, so what a neighbouring brand charges tells you comparatively little.":""}`}
       <div style="margin-top:11px;font-size:13px;color:var(--ink-2)">
-        ${sibs.length?`Evidence would come from ${sibs.length} sibling${sibs.length>1?"s":""}: ${sibs.join(", ")}.`
-                     :"No siblings in this category — nothing to pool from."}
-        No amount of sibling evidence pulls this below sd ${tauB.toFixed(2)}.
+        ${sibs.length?`It would be drawing on ${sibs.length} brand${sibs.length>1?"s":""} in the same category: ${sibs.join(", ")}.`
+                     :"Nothing else sits in this category, so there is nothing to learn from."}
+        Even with perfect knowledge of its neighbours, brands still differ, so some uncertainty never goes away.
       </div>
     </div>`;
 }
