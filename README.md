@@ -95,6 +95,15 @@ Rohit isn't a worse operator. He states 12-point intervals on a question that mo
 - **Automatic claim extraction is the hardest unbuilt piece.** Most Slack messages are opinions, not causal claims, and attribution is the whole problem. The evidence tiers are the design response, not a solution.
 - **Monoculture risk is real.** Thirty brands forking from one prior converge on the same price, hook and channel. Deliberate exploration diversity has to be a designed floor, not an afterthought.
 
+## The rest of the submission
+
+| | |
+|---|---|
+| [Architecture, data sources, HITL checkpoints](docs/architecture.md) | Where claims come from, the five agents, and the six places a human decides |
+| [Tech stack + 30-day roadmap](docs/roadmap-30-day.md) | What ships each week, what is deliberately not built, and how to tell whether it worked |
+| [Portfolio research notes](docs/portfolio-notes.md) | Every Think9 claim traced to a source, with inferences flagged |
+| [Interactive simulator](sim/index.html) | One launch decision, walked through four times. Open the file; no install |
+
 ## Layout
 
 ```
