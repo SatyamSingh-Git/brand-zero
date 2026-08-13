@@ -1,0 +1,485 @@
+<title>Brand Zero</title>
+<style>
+  :root {
+    color-scheme: light;
+    --plane:      #f9f9f7;
+    --surface:    #fcfcfb;
+    --ink:        #0b0b0b;
+    --ink-2:      #52514e;
+    --muted:      #898781;
+    --grid:       #e1e0d9;
+    --axis:       #c3c2b7;
+    --border:     rgba(11,11,11,0.10);
+    --s1:         #2a78d6;  /* Brand Zero */
+    --s2:         #eb6834;  /* naive pool */
+    --s3:         #1baf7a;  /* siloed */
+    --critical:   #d03b3b;
+    --good:       #006300;
+    --accent-bg:  rgba(42,120,214,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --plane:    #0d0d0d;
+      --surface:  #1a1a19;
+      --ink:      #ffffff;
+      --ink-2:    #c3c2b7;
+      --muted:    #898781;
+      --grid:     #2c2c2a;
+      --axis:     #383835;
+      --border:   rgba(255,255,255,0.10);
+      --s1:       #3987e5;
+      --s2:       #d95926;
+      --s3:       #199e70;
+      --critical: #d03b3b;
+      --good:     #0ca30c;
+      --accent-bg: rgba(57,135,229,0.10);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --plane:    #0d0d0d;
+    --surface:  #1a1a19;
+    --ink:      #ffffff;
+    --ink-2:    #c3c2b7;
+    --muted:    #898781;
+    --grid:     #2c2c2a;
+    --axis:     #383835;
+    --border:   rgba(255,255,255,0.10);
+    --s1:       #3987e5;
+    --s2:       #d95926;
+    --s3:       #199e70;
+    --critical: #d03b3b;
+    --good:     #0ca30c;
+    --accent-bg: rgba(57,135,229,0.10);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--ink);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 20px 72px; }
+
+  header { margin-bottom: 8px; }
+  h1 { font-size: 30px; line-height: 1.15; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .lede {
+    font-size: 17px; color: var(--ink-2); margin: 0 0 18px; max-width: 62ch;
+    border-left: 3px solid var(--s1); padding-left: 14px;
+  }
+  .stamp {
+    display: inline-block; font-size: 12px; color: var(--ink-2);
+    background: var(--accent-bg); border: 1px solid var(--border);
+    border-radius: 5px; padding: 6px 10px; margin-bottom: 26px;
+  }
+
+  h2 { font-size: 19px; margin: 40px 0 4px; letter-spacing: -0.005em; }
+  .sub { color: var(--ink-2); font-size: 14px; margin: 0 0 16px; max-width: 68ch; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px;
+  }
+
+  /* filters in one row above the charts */
+  .controls {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+    gap: 14px 22px; margin-bottom: 22px;
+  }
+  .ctl label { display: block; font-size: 12px; color: var(--ink-2); margin-bottom: 5px; }
+  .ctl .val { color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 600; }
+  input[type=range] { width: 100%; accent-color: var(--s1); margin: 0; }
+  .hint { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  figure { margin: 0; }
+  figcaption { font-size: 13px; color: var(--ink-2); margin-top: 10px; }
+  .chart-scroll { overflow-x: auto; }
+  svg { display: block; max-width: 100%; height: auto; }
+  .gl { stroke: var(--grid); stroke-width: 1; }
+  .ax { stroke: var(--axis); stroke-width: 1; }
+  .tick { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .alab { fill: var(--ink-2); font-size: 12px; }
+  .dlab { font-size: 12px; font-weight: 600; }
+  .floor { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 3 4; }
+  .floorlab { fill: var(--muted); font-size: 11px; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 0 0 12px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--ink-2); }
+  .sw { width: 13px; height: 3px; border-radius: 2px; flex: none; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .tile .k { font-size: 12px; color: var(--ink-2); margin-bottom: 6px; }
+  .tile .v { font-size: 27px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.1; }
+  .tile .n { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .bad { color: var(--critical); }
+  .ok  { color: var(--good); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+  th:first-child, td:first-child { text-align: left; font-variant-numeric: normal; }
+  th { color: var(--ink-2); font-weight: 600; }
+  details { margin-top: 14px; }
+  summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
+
+  select {
+    font: inherit; font-size: 14px; padding: 7px 10px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+  }
+  .verdict { font-size: 15px; margin: 14px 0 0; padding: 13px 15px; border-radius: 8px; border: 1px solid var(--border); }
+  .verdict.no { border-left: 3px solid var(--critical); }
+  .verdict.yes { border-left: 3px solid var(--s1); }
+  .limits { border-left: 3px solid var(--muted); padding-left: 16px; color: var(--ink-2); font-size: 14px; }
+  .limits li { margin-bottom: 9px; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em; }
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Brand Zero</h1>
+  <p class="lede">If Brand 30 costs as much to get right as Brand 1, you don't have a house of brands. You have thirty startups sharing an office.</p>
+  <div class="stamp">Brand names are Think9's real portfolio, public as of 13 Aug 2026. Every effect size here is <strong>synthetic</strong> — Think9's performance data is not public and is not used.</div>
+</header>
+
+<h2>What a new brand inherits</h2>
+<p class="sub">A brand about to launch faces a decision — what creative hook, what price ladder — and has measured nothing. The question is how much its siblings can tell it before it spends anything. Move the sliders: these are the assumptions, and the case has to survive you changing them.</p>
+
+<div class="controls card" id="controls"></div>
+
+<div class="card">
+  <div class="legend" id="legend"></div>
+  <figure>
+    <div class="chart-scroll"><svg id="c1" viewBox="0 0 720 340" role="img" aria-label="Inherited uncertainty against number of siblings in the same category"></svg></div>
+    <figcaption id="cap1"></figcaption>
+  </figure>
+</div>
+
+<h2>And what portfolio size buys — which is much less</h2>
+<p class="sub">Same question, one variable swapped: not how many siblings the new brand has, but how many brands Think9 owns in total. This is the number the pitch wanted to be big.</p>
+
+<div class="tiles" id="compare"></div>
+<p class="sub" style="margin-top:14px">Both figures are variance reduction for a brand about to launch. The
+sibling number is computed live from the sliders above. The portfolio number is <em>measured</em>, by fitting the
+full model to simulated histories at each size and averaging over six worlds — the closed form driving this page
+treats the transfer structure as known, so it would understate it. Source: <code>cold_start.py</code>.</p>
+
+<h2>Why naive pooling is worse than building nothing</h2>
+<p class="sub">One pooled average over every brand — the shape most "central intelligence layer" proposals quietly take. It does not reduce error at all; its point estimate is still the portfolio mean. It only reduces the <em>stated</em> uncertainty, which is the part that gets people to act.</p>
+<div class="tiles" id="tiles"></div>
+
+<h2>Ask it something</h2>
+<p class="sub">The answer that matters most is the one where it declines.</p>
+<div class="card">
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:4px">
+    <select id="qBrand"></select>
+    <select id="qClass">
+      <option value="creative_hook">creative hook</option>
+      <option value="price_ladder">price ladder</option>
+    </select>
+  </div>
+  <div id="answer"></div>
+</div>
+
+<h2>The rupee case, with the assumptions exposed</h2>
+<p class="sub">No access to Think9's numbers, so this is a Fermi estimate and every input is a slider above or below. Change them and see whether the case survives.</p>
+<div class="controls card" id="controls2"></div>
+<div class="tiles" id="money"></div>
+
+<h2>The data behind the charts</h2>
+<details open>
+  <summary>Table view</summary>
+  <div class="card" style="margin-top:10px"><table id="tbl"></table></div>
+</details>
+
+<h2>What this does not show</h2>
+<ul class="limits">
+  <li><strong>These curves are generated from the model being fitted.</strong> A world with three-level structure is simulated, and a three-level model reads it well. That demonstrates the mechanism; it is not evidence Think9's portfolio behaves this way. The protocol that would settle it is hold-one-brand-out against the real ledger — a week-3 measurement, not a claim being made here.</li>
+  <li><strong>Brand Zero's calibration is exact by construction in this view</strong>, because the closed form reports the variance it actually has. In the repository it is measured instead, and it lands at 70–85% coverage against an 80% target rather than exactly 80%.</li>
+  <li><strong>Category structure is asserted, not learned.</strong> Grouping eleven brands into five categories is a modelling choice made by whoever wrote the config. In production it should come from the operators, or from brand embeddings.</li>
+  <li><strong>Extraction is the unbuilt piece.</strong> Turning Slack threads and meeting notes into causal claims is harder than anything shown here, and most messages are opinions rather than claims. The evidence tiers are the design response, not a solution.</li>
+</ul>
+
+<p class="sub" style="margin-top:34px">
+Reference implementation, tests and sources: <code>github.com/SatyamSingh-Git/brand-zero</code>
+</p>
+</div>
+
+<script>
+// ---------------------------------------------------------------- portfolio --
+// Real brands, real categories (think9co.in/portfolio, 13 Aug 2026).
+const PORTFOLIO = [
+  ["The Good Bug","ingestible wellness"], ["SuperYou","ingestible wellness"],
+  ["Panchamrit","ingestible wellness"],   ["Neude","beauty & personal care"],
+  ["Beauty by Bie","beauty & personal care"], ["Anaar","apparel"],
+  ["Kingdom of White","apparel"],         ["Amar Chitra Katha","media IP"],
+  ["Tinkle","media IP"],                  ["Food Stories","retail format"],
+  ["Broadway","retail format"],
+];
+const CATS = [...new Set(PORTFOLIO.map(b => b[1]))];
+
+// ------------------------------------------------------------------- model --
+// Closed form, not MCMC: with the two scale parameters supplied by the sliders
+// the normal-normal hierarchy is conjugate, so every number below is exact and
+// instant. The repository fits these same quantities from data by Gibbs.
+const N_CATS = 5;   // Think9's eleven brands group into five
+function solve(p) {
+  const varSib  = p.tauB*p.tauB + (p.se*p.se)/p.nTests;    // one sibling, about its category mean
+  // Brands outside the target category are not useless -- they sharpen the
+  // PORTFOLIO mean, which is what the target category shrinks toward when it
+  // has few members of its own. Leaving this pathway out makes portfolio size
+  // look irrelevant by construction rather than by measurement, which is a
+  // different and much weaker claim than the one being made.
+  const perCat  = Math.max(p.nBrands / N_CATS, 0.001);
+  const varMuC0 = varSib / perCat;                          // a category mean from its own brands
+  const varMu0  = (p.tauC*p.tauC + varMuC0) / N_CATS;       // portfolio mean from the categories
+  const varMuC  = 1 / (p.k/varSib + 1/(p.tauC*p.tauC + varMu0));
+  const bzVar   = varMuC + p.tauB*p.tauB;                   // + irreducible brand idiosyncrasy
+  const siloVar = p.tauC*p.tauC + p.tauB*p.tauB;            // knows nothing about its category
+  const naiveVar = (p.se*p.se) / Math.max(p.nBrands*p.nTests, 1); // what it CLAIMS
+  return {
+    bz: Math.sqrt(bzVar),
+    silo: Math.sqrt(siloVar),
+    naiveClaimed: Math.sqrt(naiveVar),
+    naiveActual: Math.sqrt(siloVar),   // its estimate is the grand mean, so its error never improves
+    floor: p.tauB,
+  };
+}
+const Phi = x => 0.5*(1+erf(x/Math.SQRT2));
+function erf(x){ const s=Math.sign(x), z=Math.abs(x), t=1/(1+0.3275911*z);
+  return s*(1-((((1.061405429*t-1.453152027)*t+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-z*z)); }
+const phi = x => Math.exp(-0.5*x*x)/Math.sqrt(2*Math.PI);
+// expected cost of calling a go/no-go wrong, given a normal posterior
+function eol(mean, sd, stakes, hurdle){
+  const m = mean - hurdle, z = m/sd;
+  return stakes * (sd*phi(z) - Math.abs(m)*Phi(-Math.abs(z)));
+}
+const coverageOf = (claimedSd, actualSd) => 2*Phi(1.2816*claimedSd/actualSd) - 1;
+
+// ----------------------------------------------------------------- controls --
+const P = { tauB:0.22, tauC:0.35, se:0.15, nTests:2, k:2, nBrands:11,
+            stakes:40, hurdle:0.18, effect:0.30, cost:1.0 };
+
+const SLIDERS = [
+  ["k","Siblings in its category",0,8,1,"", "brands already measured in the same category"],
+  ["tauB","How idiosyncratic brands are",0.05,0.8,0.01,"", "τ-brand: the floor no sibling data can beat"],
+  ["tauC","How far apart categories are",0.05,0.8,0.01,"", "τ-category"],
+  ["se","Precision of one past test",0.05,0.4,0.01,"", "standard error of a claim in the ledger"],
+  ["nTests","Tests per sibling",1,6,1,"", "how much history each sibling carries"],
+  ["nBrands","Portfolio size",4,40,1,"", "Think9 today: 11"],
+];
+const SLIDERS2 = [
+  ["stakes","Revenue riding on the decision",5,200,5,"₹","lakh, per brand, this quarter"],
+  ["effect","Expected effect",0.0,0.8,0.02,"","standardized; 0.30 ≈ a 35% lift"],
+  ["hurdle","Hurdle it must clear",0.0,0.6,0.02,"","what adopting costs, same scale"],
+  ["cost","Cost of one test",0.2,20,0.2,"₹","lakh"],
+];
+
+function buildSliders(host, defs){
+  host.innerHTML = defs.map(([key,label,min,max,step,pre,hint]) => `
+    <div class="ctl">
+      <label for="s_${key}">${label} <span class="val" id="v_${key}"></span></label>
+      <input type="range" id="s_${key}" min="${min}" max="${max}" step="${step}" value="${P[key]}">
+      <div class="hint">${hint}</div>
+    </div>`).join("");
+  defs.forEach(([key,,,,,pre]) => {
+    const el = document.getElementById("s_"+key);
+    el.addEventListener("input", () => {
+      P[key] = parseFloat(el.value);
+      document.getElementById("v_"+key).textContent = pre + fmtVal(key, P[key]);
+      render();
+    });
+  });
+}
+const fmtVal = (k,v) => (k==="k"||k==="nTests"||k==="nBrands"||k==="stakes") ? v : v.toFixed(2);
+
+// -------------------------------------------------------------------- chart --
+const M = {l:56, r:132, t:18, b:44};
+function lineChart(svg, W, H, series, xs, xlab, ylab, floor){
+  const iw = W-M.l-M.r, ih = H-M.t-M.b;
+  const all = series.flatMap(s=>s.pts.map(p=>p[1])).concat(floor??[]);
+  const ymax = Math.max(...all)*1.12 || 1, ymin = 0;
+  const X = i => M.l + (iw*(i-xs[0]))/((xs[xs.length-1]-xs[0])||1);
+  const Y = v => M.t + ih - ih*(v-ymin)/(ymax-ymin);
+  let o = "";
+  const ticks = 5;
+  for(let i=0;i<=ticks;i++){
+    const v = ymin+(ymax-ymin)*i/ticks, y = Y(v);
+    o += `<line class="gl" x1="${M.l}" y1="${y.toFixed(1)}" x2="${M.l+iw}" y2="${y.toFixed(1)}"/>`;
+    o += `<text class="tick" x="${M.l-9}" y="${(y+4).toFixed(1)}" text-anchor="end">${v.toFixed(2)}</text>`;
+  }
+  xs.forEach(x => { o += `<text class="tick" x="${X(x).toFixed(1)}" y="${M.t+ih+19}" text-anchor="middle">${x}</text>`; });
+  o += `<line class="ax" x1="${M.l}" y1="${M.t+ih}" x2="${M.l+iw}" y2="${M.t+ih}"/>`;
+  o += `<text class="alab" x="${M.l+iw/2}" y="${H-6}" text-anchor="middle">${xlab}</text>`;
+  o += `<text class="alab" transform="translate(13,${M.t+ih/2}) rotate(-90)" text-anchor="middle">${ylab}</text>`;
+  if(floor!=null){
+    o += `<line class="floor" x1="${M.l}" y1="${Y(floor).toFixed(1)}" x2="${M.l+iw}" y2="${Y(floor).toFixed(1)}"/>`;
+    o += `<text class="floorlab" x="${M.l+6}" y="${(Y(floor)-6).toFixed(1)}">irreducible: how much brands genuinely differ</text>`;
+  }
+  series.forEach(s => {
+    const d = s.pts.map((p,i)=>`${i?"L":"M"}${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join("");
+    o += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linecap="round"
+           ${s.dash?'stroke-dasharray="5 4"':''}/>`;
+    const last = s.pts[s.pts.length-1];
+    o += `<circle cx="${X(last[0]).toFixed(1)}" cy="${Y(last[1]).toFixed(1)}" r="4" fill="${s.color}"
+           stroke="var(--surface)" stroke-width="2"/>`;
+    o += `<text class="dlab" x="${M.l+iw+11}" y="${(Y(last[1])+4).toFixed(1)}" fill="${s.color}">${s.name}</text>`;
+  });
+  svg.innerHTML = o;
+}
+
+// ------------------------------------------------------------------ render --
+// legend wording must match the direct labels on the lines exactly, or the two
+// read as different series
+const SER = [["Brand Zero","--s1"],["naive (claimed)","--s2"],["siloed","--s3"]];
+function cvar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+
+function render(){
+  const C = SER.map(([n,v])=>cvar(v));
+  document.getElementById("legend").innerHTML = SER.map(([n],i)=>
+    `<span><i class="sw" style="background:${C[i]}"></i>${n}</span>`).join("");
+
+  // chart 1 -- siblings
+  const ks = [0,1,2,3,4,5,6,7,8];
+  const rows = ks.map(k => ({k, ...solve({...P, k})}));
+  lineChart(document.getElementById("c1"), 720, 340, [
+    {name:"Brand Zero", color:C[0], pts: rows.map(r=>[r.k, r.bz])},
+    {name:"naive (claimed)", color:C[1], dash:true, pts: rows.map(r=>[r.k, r.naiveClaimed])},
+    {name:"siloed", color:C[2], pts: rows.map(r=>[r.k, r.silo])},
+  ], ks, "siblings already measured in the same category",
+     "uncertainty a new brand inherits (sd)", P.tauB);
+
+  const r0 = rows[0], r2 = rows[2], r8 = rows[8];
+  const cut2 = 100*(1-r2.bz/r0.bz), cut8 = 100*(1-r8.bz/r2.bz);
+  document.getElementById("cap1").innerHTML =
+    `On this axis, the first two siblings cut inherited uncertainty <strong>${cut2.toFixed(0)}%</strong> `+
+    `(as sd; <strong>${(100*(1-(r2.bz**2)/(r0.bz**2))).toFixed(0)}%</strong> as variance, which is what the `+
+    `pooling verdicts below use). Siblings three through eight add <strong>${cut8.toFixed(0)}%</strong> more. `+
+    `The dashed line is what naive pooling <em>claims</em>; its real error never leaves the siloed line.`;
+
+  // portfolio size vs siblings -- two flat lines would be a worse chart than
+  // two numbers, so this is two numbers
+  const varCut = (a,b) => 100*(1 - (a*a)/(b*b));
+  const sibCut = varCut(rows[2].bz, rows[0].bz);
+  document.getElementById("compare").innerHTML = `
+    <div class="tile"><div class="k">giving a new brand its first two siblings</div>
+      <div class="v ok">-${sibCut.toFixed(0)}%</div>
+      <div class="n">variance, computed live from the sliders above</div></div>
+    <div class="tile"><div class="k">growing the portfolio from 11 brands to 30</div>
+      <div class="v">-12%</div>
+      <div class="n">variance, measured by fitting the full model</div></div>
+    <div class="tile" style="grid-column:1/-1">
+      <div class="k">what that means for what Think9 launches next</div>
+      <div class="v" style="font-size:17px;font-weight:600;line-height:1.4">
+        A house of brands compounds by going deeper into fewer categories, not wider across more.</div>
+      <div class="n">Five categories of six brands learns faster than thirty categories of one. Thirty brands
+        spread across thirty categories is, for learning purposes, thirty startups sharing an office.</div></div>`;
+
+  // overconfidence tiles
+  const cur = solve(P);
+  const cov = coverageOf(cur.naiveClaimed, cur.naiveActual);
+  const oneIn = cov > 0.001 ? Math.round(1/cov) : 999;
+  document.getElementById("tiles").innerHTML = `
+    <div class="tile"><div class="k">naive pool says its 80% interval is</div>
+      <div class="v">±${(1.2816*cur.naiveClaimed).toFixed(2)}</div>
+      <div class="n">on the standardized effect scale</div></div>
+    <div class="tile"><div class="k">its actual typical error is</div>
+      <div class="v bad">±${(1.2816*cur.naiveActual).toFixed(2)}</div>
+      <div class="n">${(cur.naiveActual/cur.naiveClaimed).toFixed(0)}× wider than advertised</div></div>
+    <div class="tile"><div class="k">so that "80%" interval really covers</div>
+      <div class="v bad">${(100*cov).toFixed(0)}%</div>
+      <div class="n">about one time in ${oneIn}</div></div>
+    <div class="tile"><div class="k">Brand Zero, same inputs</div>
+      <div class="v ok">±${(1.2816*cur.bz).toFixed(2)}</div>
+      <div class="n">wider, and honest about it</div></div>`;
+
+  renderAnswer(); renderMoney(); renderTable(rows);
+}
+
+// ---------------------------------------------------------------- question --
+const qBrand = document.getElementById("qBrand");
+qBrand.innerHTML = PORTFOLIO.map((b,i)=>`<option value="${i}">${b[0]}</option>`).join("")
+  + `<option value="-1">a new brand, not yet launched</option>`;
+qBrand.value = "-1";
+qBrand.addEventListener("change", renderAnswer);
+document.getElementById("qClass").addEventListener("change", renderAnswer);
+
+function renderAnswer(){
+  const bi = parseInt(qBrand.value, 10);
+  const cls = document.getElementById("qClass").value;
+  // price ladders are dominated by each brand's own positioning: the same
+  // portfolio, a different transfer structure
+  const tauB = cls === "price_ladder" ? Math.max(P.tauB*3.2, 0.55) : P.tauB;
+  const cat = bi >= 0 ? PORTFOLIO[bi][1] : "ingestible wellness";
+  const sibs = PORTFOLIO.filter((b,i)=> b[1]===cat && i!==bi).map(b=>b[0]);
+  // however many siblings this brand actually has in Think9's portfolio --
+  // not a slider, because the honest answer depends on the real shape of it
+  const s = solve({...P, tauB, k: sibs.length});
+  // variance, not sd -- this is the same quantity transfer_report() computes in
+  // the repository, and the 40% bar is calibrated against it
+  const drop = 1 - (s.bz*s.bz)/(s.silo*s.silo);
+  const transfers = drop >= 0.40;
+  const lo = P.effect - 1.2816*s.bz, hi = P.effect + 1.2816*s.bz;
+  const pct = v => ((Math.exp(v)-1)*100).toFixed(0);
+
+  document.getElementById("answer").innerHTML = `
+    <div class="verdict ${transfers?"yes":"no"}">
+      <div style="font-weight:650;margin-bottom:6px">
+        ${transfers ? "Pooling earns its place here." : "It declines to pool."}
+      </div>
+      ${transfers
+        ? `Siblings cut the variance <strong>${(100*drop).toFixed(0)}%</strong>, above the 40% bar.
+           Expect about <strong>${pct(P.effect)}%</strong>, and be unsurprised by anything
+           between ${pct(lo)}% and ${pct(hi)}%.`
+        : `Siblings cut the variance only <strong>${(100*drop).toFixed(0)}%</strong>, under the 40% bar.
+           It returns a wide prior and a recommendation to test, not a confident number.
+           ${cls==="price_ladder"
+             ? "Price response is dominated by each brand's own positioning and SKU architecture — knowing what a sibling's ladder did tells you comparatively little."
+             : ""}`}
+      <div style="margin-top:10px;font-size:13px;color:var(--ink-2)">
+        ${sibs.length ? `Evidence would come from ${sibs.length} sibling${sibs.length>1?"s":""}: ${sibs.join(", ")}.`
+                      : "No siblings in this category — nothing to pool from."}
+        Floor: no quantity of sibling evidence pulls this below sd ${tauB.toFixed(2)}.
+      </div>
+    </div>`;
+}
+
+// ------------------------------------------------------------------- money --
+function renderMoney(){
+  const cur = solve(P);
+  const stakes = P.stakes*1e5, cost = P.cost*1e5;
+  const eSilo = eol(P.effect, cur.silo, stakes, P.hurdle);
+  const eBz   = eol(P.effect, cur.bz,   stakes, P.hurdle);
+  const saved = eSilo - eBz;
+  const cpvl  = saved > 0 ? cost/saved : Infinity;
+  const L = v => "₹" + (v/1e5).toFixed(2) + "L";
+  document.getElementById("money").innerHTML = `
+    <div class="tile"><div class="k">decision risk, starting cold</div>
+      <div class="v">${L(eSilo)}</div><div class="n">expected cost of calling it wrong</div></div>
+    <div class="tile"><div class="k">decision risk, forked from Brand Zero</div>
+      <div class="v">${L(eBz)}</div><div class="n">same decision, inherited prior</div></div>
+    <div class="tile"><div class="k">removed per launch, free</div>
+      <div class="v ok">${L(saved)}</div><div class="n">before the brand spends anything</div></div>
+    <div class="tile"><div class="k">cost per unit of that, via testing</div>
+      <div class="v">${cpvl===Infinity?"—":cpvl.toFixed(2)+"×"}</div>
+      <div class="n">${cpvl<1?"a test is cheaper than the risk it removes":"the risk removed is worth less than the test"}</div></div>`;
+}
+
+// ------------------------------------------------------------------- table --
+function renderTable(rows){
+  document.getElementById("tbl").innerHTML =
+    `<thead><tr><th>siblings</th><th>Brand Zero</th><th>naive (claimed)</th><th>naive (actual)</th><th>siloed</th></tr></thead>`+
+    `<tbody>` + rows.map(r=>`<tr><td>${r.k}</td><td>${r.bz.toFixed(3)}</td>`+
+      `<td>${r.naiveClaimed.toFixed(3)}</td><td>${r.naiveActual.toFixed(3)}</td>`+
+      `<td>${r.silo.toFixed(3)}</td></tr>`).join("") + `</tbody>`;
+}
+
+buildSliders(document.getElementById("controls"), SLIDERS);
+buildSliders(document.getElementById("controls2"), SLIDERS2);
+[...SLIDERS, ...SLIDERS2].forEach(([k,,,,,pre]) =>
+  document.getElementById("v_"+k).textContent = (pre||"") + fmtVal(k, P[k]));
+render();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+</script>
