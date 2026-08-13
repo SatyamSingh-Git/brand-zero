@@ -103,6 +103,7 @@ Rohit isn't a worse operator. He states 12-point intervals on a question that mo
 | [Architecture, data sources, HITL checkpoints](docs/architecture.md) | Where claims come from, the five agents, and the six places a human decides |
 | [Tech stack + 30-day roadmap](docs/roadmap-30-day.md) | What ships each week, what is deliberately not built, and how to tell whether it worked |
 | [Portfolio research notes](docs/portfolio-notes.md) | Every Think9 claim traced to a source, with inferences flagged |
+| **[Week 1 — the part that runs on Monday](week1/index.html)** | Pre-registration, backfill, scoring. One file, no install, no database. Exports in the ledger schema |
 | [Interactive simulator](sim/index.html) | One launch decision, walked through four times. Open the file; no install |
 
 ## Layout

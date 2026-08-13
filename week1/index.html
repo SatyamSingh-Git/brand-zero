@@ -1,0 +1,445 @@
+<title>Brand Zero — Week 1</title>
+<style>
+  :root{
+    --plane:#f6f6f3; --surface:#ffffff; --raise:#faf9f5;
+    --ink:#17170f; --ink2:#55554d; --muted:#8a8a80;
+    --line:#e7e7e1; --hair:#f0f0ec;
+    --brand:#0f5c46; --brand-soft:#eaf2ef;
+    --bad:#c0392f; --good:#0f6b3c; --blue:#2a78d6;
+    --shadow:0 1px 2px rgba(23,23,15,.04), 0 1px 10px rgba(23,23,15,.03);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--plane);color:var(--ink);
+    font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:46px 22px 90px}
+
+  .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--brand);margin:0 0 14px}
+  h1{font-size:30px;line-height:1.2;font-weight:640;letter-spacing:-.02em;margin:0 0 14px}
+  .intro{font-size:16px;line-height:1.68;color:var(--ink2);max-width:74ch;margin:0 0 12px}
+  .intro b{color:var(--ink);font-weight:650}
+  .stamp{font-size:12.5px;color:var(--ink2);background:#fdf6ec;border:1px solid #f0e4d0;
+    border-radius:8px;padding:10px 14px;margin:22px 0 30px}
+
+  .tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+  .tabs button{font:inherit;font-size:13.5px;padding:9px 16px;border-radius:22px;cursor:pointer;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink2);box-shadow:var(--shadow)}
+  .tabs button:hover{border-color:var(--brand);color:var(--ink)}
+  .tabs button[aria-current="true"]{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:600}
+
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:26px 28px;box-shadow:var(--shadow)}
+  .panel h2{font-size:11.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 8px}
+  .panel .lede{font-size:14.5px;color:var(--ink2);margin:0 0 22px;max-width:70ch;line-height:1.6}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px 22px}
+  .f{display:flex;flex-direction:column}
+  .f label{font-size:12px;font-weight:600;color:var(--ink2);margin-bottom:6px}
+  .f .hint{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.45}
+  input,select,textarea{font:inherit;font-size:14px;padding:9px 11px;border-radius:8px;
+    border:1px solid var(--line);background:var(--raise);color:var(--ink);width:100%}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--brand-soft);border-color:var(--brand)}
+  textarea{resize:vertical;min-height:62px}
+  .span2{grid-column:1/-1}
+
+  .actions{display:flex;gap:10px;align-items:center;margin-top:22px;padding-top:20px;
+    border-top:1px solid var(--hair);flex-wrap:wrap}
+  .btn{font:inherit;font-size:14px;font-weight:600;padding:10px 20px;border-radius:9px;
+    border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer}
+  .btn.ghost{background:var(--surface);color:var(--ink2);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--brand);color:var(--ink)}
+  .msg{font-size:13.5px;color:var(--good);font-weight:600}
+  .msg.err{color:var(--bad)}
+
+  table{border-collapse:collapse;width:100%;font-size:13px;margin-top:4px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--hair);vertical-align:top}
+  th{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.ex td{background:#fdfaf3}
+  .pill{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;padding:3px 8px;border-radius:20px;background:var(--brand-soft);
+    color:var(--brand);white-space:nowrap}
+  .pill.warn{background:#fdf0ec;color:var(--bad)}
+  .pill.ex{background:#f3ead6;color:#8a6a1f}
+  .empty{font-size:14px;color:var(--muted);padding:26px 0;text-align:center}
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
+  .tile{background:var(--raise);border:1px solid var(--line);border-radius:11px;padding:16px 18px}
+  .tile .k{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px}
+  .tile .v{font-size:26px;font-weight:670;letter-spacing:-.02em;line-height:1;
+    font-variant-numeric:tabular-nums}
+  .tile .n{font-size:11.5px;color:var(--muted);margin-top:7px;line-height:1.45}
+  .good{color:var(--good)} .bad{color:var(--bad)}
+
+  .note{font-size:13.5px;color:var(--ink2);background:var(--raise);border:1px solid var(--line);
+    border-left:3px solid var(--brand);border-radius:8px;padding:14px 16px;line-height:1.6;margin-top:22px}
+  .note b{color:var(--ink);font-weight:650}
+  code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.9em}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Brand Zero · Week 1</p>
+  <h1>The part that runs on Monday.</h1>
+  <p class="intro">Everything else in this proposal needs sibling brands before it pays. <b>This does not.</b> It needs one thing: that before a launch decision, the person making it writes down what they expect — and gets scored afterwards. Two quarters of that tells Think9 which operators are calibrated on which kinds of decision, which is worth having whether or not the rest of the system is ever built.</p>
+  <p class="intro">This page is the whole week-one tool. One file, no install, no database, no engineering time. It saves to your browser and exports to CSV or JSON in the exact schema the model reads.</p>
+
+  <div class="stamp"><b>Nothing here is pre-filled with Think9 data.</b> The brand list is Think9's real public portfolio; the ledger starts empty apart from three rows marked <span class="pill ex">example</span> that show the shape. Any real entry is one you type.</div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <!-- ─────────── forecast ─────────── -->
+  <section class="panel" id="p-forecast">
+    <h2>Before the decision</h2>
+    <p class="lede">Ninety seconds, before the launch or the test. The point is not to be right — it is to be on record, so that later you can find out whether you were. Give the range you would genuinely be surprised to fall outside.</p>
+    <div class="grid">
+      <div class="f"><label for="f_brand">Brand</label><select id="f_brand"></select></div>
+      <div class="f"><label for="f_class">Decision</label><select id="f_class"></select></div>
+      <div class="f"><label for="f_by">Your name</label><input id="f_by" placeholder="who is forecasting"></div>
+      <div class="f span2"><label for="f_q">What is being decided</label>
+        <input id="f_q" placeholder="e.g. switch launch creative to the dermat-tested angle">
+        <span class="hint">One sentence. Specific enough that in six weeks you can tell whether it happened.</span></div>
+      <div class="f"><label for="f_point">Expected effect</label>
+        <input id="f_point" type="number" step="1" placeholder="e.g. 35">
+        <span class="hint">Percent change you expect. Negative is allowed.</span></div>
+      <div class="f"><label for="f_lo">Low end</label><input id="f_lo" type="number" step="1" placeholder="e.g. -5"></div>
+      <div class="f"><label for="f_hi">High end</label><input id="f_hi" type="number" step="1" placeholder="e.g. 90"></div>
+      <div class="f span2"><label for="f_why">Why (optional)</label>
+        <textarea id="f_why" placeholder="What are you reasoning from? This is the part nobody writes down and everybody wishes they had."></textarea></div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="f_save">Record forecast</button>
+      <span class="msg" id="f_msg"></span>
+    </div>
+    <div class="note"><b>You should be wrong about one time in five.</b> The range you give is an 80% range: if the truth lands inside it every single time, your ranges are too wide to be useful. If it lands inside less than half the time, they are too narrow to be safe. Both are fixable, and neither is visible until someone writes the ranges down.</div>
+  </section>
+
+  <!-- ─────────── backfill ─────────── -->
+  <section class="panel" id="p-backfill" hidden>
+    <h2>Backfill a decision you already made</h2>
+    <p class="lede">The most valuable day of week one, and it involves no AI at all: someone who was in the room writes down twenty to thirty past decisions. This is the form for that. Be honest about the last field — it is the one that decides how much this claim is allowed to move anything.</p>
+    <div class="grid">
+      <div class="f"><label for="b_brand">Brand</label><select id="b_brand"></select></div>
+      <div class="f"><label for="b_class">Decision</label><select id="b_class"></select></div>
+      <div class="f"><label for="b_date">When</label><input id="b_date" type="date"></div>
+      <div class="f span2"><label for="b_int">What was tried</label>
+        <input id="b_int" placeholder="e.g. trial pack at Rs.99 instead of Rs.149"></div>
+      <div class="f span2"><label for="b_ctx">Where / who</label>
+        <input id="b_ctx" placeholder="e.g. Tier-2 metros, 18-34F, non-festive">
+        <span class="hint">Context is what stops this being pooled with something it has nothing to do with.</span></div>
+      <div class="f"><label for="b_metric">What moved</label>
+        <input id="b_metric" placeholder="e.g. units, CVR, AOV"></div>
+      <div class="f"><label for="b_effect">By how much (%)</label>
+        <input id="b_effect" type="number" step="1" placeholder="e.g. 18"></div>
+      <div class="f"><label for="b_tier">How do you know</label><select id="b_tier"></select>
+        <span class="hint" id="b_tierhint"></span></div>
+      <div class="f span2"><label for="b_src">Where can someone check this</label>
+        <input id="b_src" placeholder="link to the dashboard, sheet, Slack thread or campaign">
+        <span class="hint">Required. A claim nobody can trace is a rumour, and the schema rejects it.</span></div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="b_save">Add to ledger</button>
+      <span class="msg" id="b_msg"></span>
+    </div>
+  </section>
+
+  <!-- ─────────── resolve ─────────── -->
+  <section class="panel" id="p-resolve" hidden>
+    <h2>After the outcome is known</h2>
+    <p class="lede">Come back when the result is in. Enter what actually happened and every forecast recorded against that decision is scored at once — including, eventually, the model's.</p>
+    <div id="r_list"></div>
+  </section>
+
+  <!-- ─────────── ledger ─────────── -->
+  <section class="panel" id="p-ledger" hidden>
+    <h2>The ledger</h2>
+    <p class="lede">Everything recorded so far. Export lands in the same schema <code>brandzero/schema.py</code> reads, so week two's pipeline can pick it up without a migration.</p>
+    <div class="tiles" id="l_tiles"></div>
+    <div style="overflow-x:auto"><table id="l_tbl"></table></div>
+    <div class="actions">
+      <button class="btn ghost" id="l_csv">Export CSV</button>
+      <button class="btn ghost" id="l_json">Export JSON</button>
+      <button class="btn ghost" id="l_clear">Clear everything</button>
+      <span class="msg" id="l_msg"></span>
+    </div>
+  </section>
+
+  <!-- ─────────── scores ─────────── -->
+  <section class="panel" id="p-scores" hidden>
+    <h2>Who is calibrated</h2>
+    <p class="lede">Scored by the Winkler interval score — the same rule <code>brandzero/calibration.py</code> applies to the model. Lower is better. It penalises wide ranges a little and confident misses a lot, so the way to win is to be honest rather than either bold or vague.</p>
+    <div id="s_body"></div>
+    <div class="note"><b>The number to read is coverage, not the score.</b> Someone at 90% coverage is being careful; someone at 20% holds strong opinions too tightly. Neither is a bad operator — but only one of them knows it, and only after enough decisions to tell. Twenty is roughly where this starts being worth reading.</div>
+  </section>
+</div>
+
+<script>
+// ── Think9's real portfolio (think9co.in/portfolio, 13 Aug 2026). Public fact.
+const BRANDS = ["The Good Bug","SuperYou","Panchamrit","Neude","Beauty by Bie",
+  "Anaar","Kingdom of White","Amar Chitra Katha","Tinkle","Food Stories","Broadway",
+  "— a brand not yet launched —"];
+
+const CLASSES = {
+  price_ladder:"Price / price ladder",
+  pack_architecture:"Pack sizes & trial packs",
+  creative_hook:"Ad message / creative angle",
+  channel_mix:"Channel mix",
+  claim_language:"Claim wording (pack or ad)",
+  vendor_terms:"Vendor terms (MOQ, lead time, cost)",
+  launch_sequence:"Launch sequencing"
+};
+
+// Multiplier on precision, mirroring EVIDENCE_TIERS in brandzero/schema.py
+const TIERS = {
+  randomised:   [1.00,"A proper A-B test or holdout"],
+  quasi_split:  [0.70,"Split by city, store or time — no true control"],
+  pre_post:     [0.35,"Before and after, nothing held back"],
+  observational:[0.15,"Spotted in existing data"],
+  stated:       [0.05,"Someone's read of it — a meeting, a vendor, a hunch"]
+};
+
+const KEY = "brandzero_week1_v1";
+const EXAMPLES = [
+  {kind:"claim", example:true, brand:"— example —", decision_class:"creative_hook",
+   context:"Meta, cold traffic, 25-40F", intervention:"'dermat-tested' vs 'gentle enough for daily use'",
+   outcome_metric:"cvr", effect_pct:19, evidence_tier:"randomised",
+   source_ref:"meta://campaign/8891/ab", date:"2026-04-02"},
+  {kind:"claim", example:true, brand:"— example —", decision_class:"price_ladder",
+   context:"Tier-2 metros, non-festive", intervention:"trial pack at Rs.99 vs Rs.149",
+   outcome_metric:"units", effect_pct:-42, evidence_tier:"quasi_split",
+   source_ref:"sheet://pricing-tests/2026-03#tp99", date:"2026-03-11"},
+  {kind:"claim", example:true, brand:"— example —", decision_class:"vendor_terms",
+   context:"secondary packaging, 3 vendors quoted", intervention:"MOQ cut 50k to 20k units",
+   outcome_metric:"unit cost", effect_pct:7, evidence_tier:"stated",
+   source_ref:"slack://procurement/p17441", date:"2026-05-02"}
+];
+
+let DB = load();
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return {rows: EXAMPLES.slice()};
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(DB)); }catch(e){} }
+const uid = () => "r" + Math.abs(Date.now() ^ (DB.rows.length*2654435761)).toString(36);
+
+// ── tabs
+const TABS = [["forecast","1 · Record a forecast"],["backfill","2 · Backfill a decision"],
+  ["resolve","3 · Enter an outcome"],["ledger","The ledger"],["scores","Who is calibrated"]];
+let tab = "forecast";
+document.getElementById("tabs").innerHTML =
+  TABS.map(([k,l])=>`<button type="button" data-k="${k}">${l}</button>`).join("");
+document.getElementById("tabs").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  tab = b.dataset.k; render();
+});
+
+// ── option lists
+const opts = (o,sel) => Object.entries(o).map(([k,v])=>
+  `<option value="${k}"${k===sel?" selected":""}>${Array.isArray(v)?v[1]:v}</option>`).join("");
+document.getElementById("f_brand").innerHTML = BRANDS.map(b=>`<option>${b}</option>`).join("");
+document.getElementById("b_brand").innerHTML = BRANDS.map(b=>`<option>${b}</option>`).join("");
+document.getElementById("f_class").innerHTML = opts(CLASSES);
+document.getElementById("b_class").innerHTML = opts(CLASSES);
+document.getElementById("b_tier").innerHTML = opts(TIERS);
+const tierHint = () => {
+  const t = document.getElementById("b_tier").value;
+  document.getElementById("b_tierhint").textContent =
+    "Counts at " + Math.round(TIERS[t][0]*100) + "% strength.";
+};
+document.getElementById("b_tier").addEventListener("change", tierHint); tierHint();
+document.getElementById("b_date").value = new Date().toISOString().slice(0,10);
+
+// ── save handlers
+function flash(id,text,err){
+  const el=document.getElementById(id); el.textContent=text;
+  el.className = "msg" + (err?" err":"");
+  setTimeout(()=>{el.textContent="";}, 3200);
+}
+
+document.getElementById("f_save").addEventListener("click", ()=>{
+  const g = id => document.getElementById(id).value.trim();
+  const pt=parseFloat(g("f_point")), lo=parseFloat(g("f_lo")), hi=parseFloat(g("f_hi"));
+  if(!g("f_q")) return flash("f_msg","Say what is being decided.",1);
+  if(!g("f_by")) return flash("f_msg","Add your name — the score is per person.",1);
+  if([pt,lo,hi].some(isNaN)) return flash("f_msg","All three numbers are needed.",1);
+  if(!(lo < hi)) return flash("f_msg","The low end has to be below the high end.",1);
+  if(pt<lo||pt>hi) return flash("f_msg","Your expected value sits outside your own range.",1);
+  DB.rows.push({kind:"prediction", id:uid(), brand:g("f_brand"),
+    decision_class:document.getElementById("f_class").value, question:g("f_q"),
+    forecaster:g("f_by"), point:pt, lo:lo, hi:hi, rationale:g("f_why"),
+    stated_at:new Date().toISOString().slice(0,10), resolved_pct:null});
+  save();
+  ["f_q","f_point","f_lo","f_hi","f_why"].forEach(i=>document.getElementById(i).value="");
+  flash("f_msg","Recorded. It cannot be edited — that is the point.");
+  render();
+});
+
+document.getElementById("b_save").addEventListener("click", ()=>{
+  const g = id => document.getElementById(id).value.trim();
+  const eff = parseFloat(g("b_effect"));
+  if(!g("b_int")) return flash("b_msg","Say what was tried.",1);
+  if(isNaN(eff)) return flash("b_msg","How much did it move?",1);
+  if(!g("b_src")) return flash("b_msg","A claim nobody can check does not go in the ledger.",1);
+  DB.rows.push({kind:"claim", id:uid(), brand:g("b_brand"),
+    decision_class:document.getElementById("b_class").value, context:g("b_ctx"),
+    intervention:g("b_int"), outcome_metric:g("b_metric")||"—", effect_pct:eff,
+    evidence_tier:document.getElementById("b_tier").value, source_ref:g("b_src"),
+    date:g("b_date")});
+  save();
+  ["b_int","b_ctx","b_metric","b_effect","b_src"].forEach(i=>document.getElementById(i).value="");
+  flash("b_msg","Added.");
+  render();
+});
+
+// ── scoring: Winkler interval score, matching calibration.py
+function winkler(y, lo, hi, alpha){
+  alpha = alpha || 0.20;
+  let s = hi - lo;
+  if(y < lo) s += (2/alpha)*(lo - y);
+  else if(y > hi) s += (2/alpha)*(y - hi);
+  return s;
+}
+
+// ── render
+function render(){
+  [...document.querySelectorAll("#tabs button")].forEach(b=>
+    b.setAttribute("aria-current", b.dataset.k===tab ? "true":"false"));
+  TABS.forEach(([k])=>{ document.getElementById("p-"+k).hidden = (k!==tab); });
+  if(tab==="resolve") renderResolve();
+  if(tab==="ledger")  renderLedger();
+  if(tab==="scores")  renderScores();
+}
+
+function renderResolve(){
+  const open = DB.rows.filter(r=>r.kind==="prediction" && r.resolved_pct===null);
+  const host = document.getElementById("r_list");
+  if(!open.length){ host.innerHTML =
+    `<div class="empty">No forecasts waiting on an outcome. Record one on the first tab.</div>`; return; }
+  // group by question so one outcome settles every forecast against it
+  const byQ = {};
+  open.forEach(r=>{ (byQ[r.brand+" ‖ "+r.question] ||= []).push(r); });
+  host.innerHTML = Object.entries(byQ).map(([k,rows])=>{
+    const [brand,q] = k.split(" ‖ ");
+    return `<div style="padding:16px 0;border-bottom:1px solid var(--hair)">
+      <div style="font-size:15px;font-weight:650;margin-bottom:3px">${esc(q)}</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:10px">${esc(brand)} · ${rows.length} forecast${rows.length>1?"s":""} on record: ${
+        rows.map(r=>esc(r.forecaster)+" ("+r.lo+" to "+r.hi+")").join(", ")}</div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <input type="number" step="1" placeholder="what actually happened, %"
+          style="max-width:230px" data-q="${esc(k)}">
+        <button class="btn" data-settle="${esc(k)}">Settle</button>
+      </div></div>`;
+  }).join("");
+  host.querySelectorAll("[data-settle]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const key = btn.getAttribute("data-settle");
+      const inp = host.querySelector(`input[data-q="${CSS.escape(key)}"]`);
+      const v = parseFloat(inp.value);
+      if(isNaN(v)){ inp.focus(); return; }
+      DB.rows.forEach(r=>{
+        if(r.kind==="prediction" && r.resolved_pct===null && (r.brand+" ‖ "+r.question)===key)
+          r.resolved_pct = v;
+      });
+      save(); tab="scores"; render();
+    });
+  });
+}
+
+function renderLedger(){
+  const claims = DB.rows.filter(r=>r.kind==="claim");
+  const preds  = DB.rows.filter(r=>r.kind==="prediction");
+  const real   = claims.filter(r=>!r.example);
+  document.getElementById("l_tiles").innerHTML = `
+    <div class="tile"><div class="k">Decisions on record</div><div class="v">${real.length}</div>
+      <div class="n">week-1 target is 20–30</div></div>
+    <div class="tile"><div class="k">Forecasts recorded</div><div class="v">${preds.length}</div>
+      <div class="n">${preds.filter(p=>p.resolved_pct!==null).length} settled</div></div>
+    <div class="tile"><div class="k">Traceable to a source</div>
+      <div class="v ${real.length&&real.every(r=>r.source_ref)?"good":""}">${real.filter(r=>r.source_ref).length}/${real.length||0}</div>
+      <div class="n">enforced, not encouraged</div></div>
+    <div class="tile"><div class="k">From a real test</div>
+      <div class="v">${real.filter(r=>r.evidence_tier==="randomised"||r.evidence_tier==="quasi_split").length}</div>
+      <div class="n">the rest counts, but counts less</div></div>`;
+
+  const rows = claims.slice().reverse();
+  document.getElementById("l_tbl").innerHTML = !rows.length
+    ? `<tr><td class="empty">Nothing yet.</td></tr>`
+    : `<thead><tr><th>Brand</th><th>Decision</th><th>What was tried</th>
+        <th class="num">Effect</th><th>Evidence</th><th>Source</th></tr></thead><tbody>` +
+      rows.map(r=>`<tr class="${r.example?"ex":""}">
+        <td>${esc(r.brand)}${r.example?' <span class="pill ex">example</span>':""}</td>
+        <td>${CLASSES[r.decision_class]||r.decision_class}</td>
+        <td>${esc(r.intervention)}<div style="color:var(--muted);font-size:11.5px">${esc(r.context||"")}</div></td>
+        <td class="num">${r.effect_pct>0?"+":""}${r.effect_pct}%</td>
+        <td><span class="pill ${TIERS[r.evidence_tier][0]<0.2?"warn":""}">${Math.round(TIERS[r.evidence_tier][0]*100)}%</span></td>
+        <td style="color:var(--muted);font-size:11.5px;word-break:break-all">${esc(r.source_ref)}</td>
+      </tr>`).join("") + `</tbody>`;
+}
+
+function renderScores(){
+  const done = DB.rows.filter(r=>r.kind==="prediction" && r.resolved_pct!==null);
+  const host = document.getElementById("s_body");
+  if(!done.length){ host.innerHTML =
+    `<div class="empty">Nothing scored yet. Record a forecast, then enter its outcome.</div>`; return; }
+  const by = {};
+  done.forEach(r=>{
+    const b = (by[r.forecaster] ||= {n:0, hit:0, score:0, width:0, err:0});
+    b.n++;
+    if(r.resolved_pct>=r.lo && r.resolved_pct<=r.hi) b.hit++;
+    b.score += winkler(r.resolved_pct, r.lo, r.hi);
+    b.width += (r.hi - r.lo);
+    b.err   += (r.point - r.resolved_pct);
+  });
+  const rows = Object.entries(by).sort((a,b)=>a[1].score/a[1].n - b[1].score/b[1].n);
+  host.innerHTML = `<table><thead><tr><th>Forecaster</th><th class="num">Calls</th>
+      <th class="num">Says 80%</th><th class="num">Really is</th>
+      <th class="num">Avg range</th><th class="num">Leans</th><th class="num">Score</th></tr></thead><tbody>` +
+    rows.map(([f,b])=>{
+      const cov = 100*b.hit/b.n;
+      const cls = b.n<5 ? "" : (cov<50 ? "bad" : (cov>=70&&cov<=95 ? "good" : ""));
+      const bias = b.err/b.n;
+      return `<tr><td>${esc(f)}</td><td class="num">${b.n}</td><td class="num">80%</td>
+        <td class="num ${cls}">${cov.toFixed(0)}%</td>
+        <td class="num">${(b.width/b.n).toFixed(0)} pts</td>
+        <td class="num">${bias>0?"+":""}${bias.toFixed(0)} pts</td>
+        <td class="num">${(b.score/b.n).toFixed(1)}</td></tr>`;
+    }).join("") + `</tbody>`;
+  if(done.length < 5) host.innerHTML +=
+    `<p style="font-size:13px;color:var(--muted);margin-top:14px">Only ${done.length} settled call${done.length>1?"s":""} so far — far too few to read anything into. Coverage starts meaning something around twenty.</p>`;
+}
+
+// ── export
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function download(name, text, mime){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], {type:mime}));
+  a.download = name; a.click(); URL.revokeObjectURL(a.href);
+}
+document.getElementById("l_csv").addEventListener("click", ()=>{
+  const c = DB.rows.filter(r=>r.kind==="claim" && !r.example);
+  if(!c.length) return flash("l_msg","Nothing real to export yet.",1);
+  const cols = ["brand","category","decision_class","context","intervention","outcome_metric",
+                "effect","effect_scale","std_error","evidence_tier","source","source_ref","date"];
+  const q = v => '"' + String(v==null?"":v).replace(/"/g,'""') + '"';
+  const body = c.map(r=>[r.brand,"",r.decision_class,r.context,r.intervention,r.outcome_metric,
+    (r.effect_pct/100).toFixed(4),"pct_change","",r.evidence_tier,"week1_form",r.source_ref,r.date]
+    .map(q).join(",")).join("\n");
+  download("brandzero-ledger.csv", cols.join(",")+"\n"+body, "text/csv");
+  flash("l_msg","Exported "+c.length+" claims.");
+});
+document.getElementById("l_json").addEventListener("click", ()=>{
+  download("brandzero-week1.json", JSON.stringify(DB.rows.filter(r=>!r.example), null, 2), "application/json");
+  flash("l_msg","Exported.");
+});
+document.getElementById("l_clear").addEventListener("click", ()=>{
+  if(!confirm("Delete everything recorded on this browser? This cannot be undone.")) return;
+  DB = {rows: EXAMPLES.slice()}; save(); render();
+});
+
+render();
+</script>
