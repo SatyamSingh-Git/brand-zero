@@ -1,5 +1,6 @@
-# Think9's own challenge brief -- their document, not mine to redistribute
-*.pdf
+# Think9's own challenge brief -- their document, not mine to redistribute.
+# Scoped to that one file: a blanket *.pdf silently excluded the deck.
+260812_T9 Challenge_v2.pdf
 
 __pycache__/
 *.py[cod]
