@@ -1,18 +1,37 @@
-# Video walkthrough — about 4 minutes
+# Video walkthrough — about 5 minutes
 
 Screen recording with voiceover. No face needed.
 
-**The shape: slides carry the claims, the simulator carries the evidence.**
-Open on two slides so the viewer knows what they are looking at before any
-software appears, then go live for the proof, then come back to slides for
-the plan. A reviewer dropped straight into a tool has to learn the domain and
-the interface at the same time; the two opening slides remove half of that.
+**The shape: slides carry the claims, the simulator carries the proof.**
+Two slides first so the viewer knows what they are looking at. Then go live.
+Then come back to slides for the plan.
 
-**Two rules throughout:**
+**Three rules:**
 
-1. **Never read a slide aloud.** They read faster than you talk. Say the
-   thing the slide does *not* say.
-2. **Show, then explain.** Click first, pause a beat, then speak.
+1. **Never read a slide aloud.** They read faster than you talk.
+2. **Show, then explain.** Click first, pause, then speak.
+3. **Short sentences.** Everything below is written to be *heard*. A listener
+   cannot go back a line.
+
+---
+
+## What to open, and when
+
+| # | Time | What is on screen | File |
+|---|---|---|---|
+| 1 | 0:00 | Deck, **slide 1** (title) | `deck/brand-zero.pdf` |
+| 2 | 0:26 | Deck, **slide 4** (four organs) | `deck/brand-zero.pdf` |
+| 3 | 0:52 | Simulator, **step 1** | `sim/index.html` |
+| 4 | 1:24 | Simulator, **step 2** | `sim/index.html` |
+| 5 | 1:54 | Simulator, **step 3** ← the refusal | `sim/index.html` |
+| 6 | 2:35 | Simulator, **step 4** | `sim/index.html` |
+| 7 | 3:03 | Terminal, running the code | `python cold_start.py` |
+| 8 | 3:30 | Deck, **slide 7** (the finding) | `deck/brand-zero.pdf` |
+| 9 | 3:51 | The week-one tool | `week1/index.html` |
+| 10 | 4:17 | Deck, **slide 12**, then last slide | `deck/brand-zero.pdf` |
+
+Only **four things** are ever on screen: the deck, the simulator, the terminal,
+and the week-1 tool. You return to the deck three times.
 
 ---
 
@@ -20,150 +39,168 @@ the interface at the same time; the two opening slides remove half of that.
 
 | | |
 |---|---|
-| **Everything in one browser** | Open `deck/brand-zero.pdf` in Chrome and use its presentation mode. That keeps slides, simulator and the week-1 tool as three Chrome tabs — no app switching, no window chrome changing mid-video |
-| **Tab order** | 1 deck PDF · 2 `sim/index.html` · 3 `week1/index.html`. Terminal in a fourth window, pre-sized |
+| **Everything in one browser** | Open `deck/brand-zero.pdf` in Chrome, use presentation mode. Deck, simulator and week-1 tool become three Chrome tabs. No app switching mid-video |
+| **Tab order** | 1 `deck/brand-zero.pdf` · 2 `sim/index.html` · 3 `week1/index.html`. Terminal in a fourth window, pre-sized |
 | **Resolution** | 1920×1080. Record the browser window, not the whole desktop |
-| **Browser zoom** | 110% on the simulator — its body text is 15px and reads small on video |
-| **Simulator state** | Click **step 1** before you start, so it is on the first beat |
-| **Terminal** | Font 18pt+, light theme to match the pages. A black terminal after two cream slides is jarring |
-| **Dry run** | Run `python cold_start.py` once beforehand so nothing is cold. It takes ~23s live — start it and talk over it, don't wait in silence |
+| **Browser zoom** | 110% on the simulator. Its text is small on video |
+| **Simulator state** | Click **step 1** before you start |
+| **Terminal** | Font 18pt+, light theme. A black terminal after two cream slides is jarring |
+| **Dry run** | Run `python cold_start.py` once beforehand. It takes ~23 seconds live — start it, then talk over it |
 | **Close** | Slack, mail, notifications. Hide the bookmarks bar |
-| **Cursor** | Move it slowly and deliberately. Fast cursor movement is the single biggest tell of an amateur screen recording |
+| **Cursor** | Move it slowly. Fast cursor movement is the biggest tell of an amateur recording |
 
-**Pacing:** 566 spoken words — about 3:49 read at a normal pace, landing near
-**4:29** with the pauses built into the timings below. Anything under 4:30 is fine.
+**Pacing:** 622 spoken words. About 4:12 at a normal pace, landing near
+**4:52** with pauses. Read it slower than feels natural on the first take.
 
 ---
 
-# Act 1 · Slides — what this is (0:00 – 0:47)
+# Act 1 · Slides — what this is (0:00 – 0:52)
 
-### 0:00 – 0:23 · Slide 1
-**Screen:** Deck in presentation mode, title slide.
+### 0:00 – 0:26 · Slide 1
+**File:** `deck/brand-zero.pdf` — title slide, presentation mode.
 
-> "Think9 is building thirty consumer brands. The bet behind a house of
-> brands is that each new one launches smarter than the last — because the
-> ones before it already learned something.
+> "Think9 is building thirty brands.
 >
-> If that isn't true, thirty brands under one roof is just thirty startups
-> sharing an office."
-
-### 0:23 – 0:47 · Slide 4
-**Screen:** Skip ahead to slide 4 — the four organs and the loop.
-
-> "So I built the thing that would make it true — a shared memory the whole
-> portfolio writes into and reads from.
+> The idea is simple. Each new brand should be easier than the last one,
+> because the ones before it already figured things out.
 >
-> Four parts, but the one that matters is the second: it works out which
-> brands are actually alike, instead of assuming they all are.
+> If that isn't happening, then thirty brands under one roof is just thirty
+> startups sharing an office.
+>
+> So I built the thing that would make it happen."
+
+### 0:26 – 0:52 · Slide 4
+**File:** `deck/brand-zero.pdf` — skip to **slide 4**, the four organs.
+
+> "It's a shared memory for all the brands.
+>
+> Every brand writes what it learns into it. Every new brand reads from it
+> before it starts.
+>
+> There are four pieces. The one that matters most works out which brands are
+> actually similar. It doesn't just assume they all are.
 >
 > Let me show you it running."
 
 ---
 
-# Act 2 · Simulator — the proof (0:47 – 2:45)
+# Act 2 · Simulator — the proof (0:52 – 3:03)
 
-### 0:47 – 1:16 · The problem
-**Screen:** Tab 2. Step 1 already selected. Cursor rests on the two figures.
+### 0:52 – 1:24 · The problem
+**File:** `sim/index.html` — tab 2, **step 1** already selected. Cursor rests
+on the two numbers.
 
-> "Think9's twelfth brand launches next month, in ingestible wellness — the
-> category The Good Bug, SuperYou and Panchamrit are already in. The team
-> picks the message for its launch ads.
+> "Think9's twelfth brand launches next month. It sells wellness products,
+> like The Good Bug and SuperYou.
 >
-> Nothing's been tested for this brand yet. So honestly, the lift could be
-> anywhere from minus twenty-four percent to plus a hundred and forty. Five
-> lakh at risk, on one call."
-
-### 1:16 – 1:41 · The fix, and its actual size
-**Screen:** Click **step 2**. Let the numbers change before speaking.
-
-> "Now let it start from what its three neighbours already learned — without
-> running a single test of its own.
+> The team picks the message for its launch ads. They think it'll lift sales
+> about thirty-five percent.
 >
-> The range tightens. Money at risk drops from five lakh to two point three.
+> But nobody has tested anything for this brand yet. So how sure can they be?
 >
-> That gap is the house-of-brands thesis, and that's its actual size. Every
-> assumption behind it is a slider on this page."
+> Not very. Sales could fall twenty-four percent. Or rise a hundred and
+> forty. And there's five lakh riding on that one choice."
 
-### 1:41 – 2:18 · The part that matters most
-**Screen:** Click **step 3**. Pause two seconds. Let the refusal sit there.
+### 1:24 – 1:54 · What the other brands are worth
+**File:** `sim/index.html` — click **step 2**. Let the numbers change before
+you speak.
 
-> "Same brand, same three neighbours, different question: what should it
+> "Now let it start from what its three neighbours already learned. It still
+> hasn't run a test of its own.
+>
+> The range gets much narrower. The bad case is mostly gone. And the money at
+> risk drops from five lakh to two and a third.
+>
+> That drop is the whole point of a house of brands. Now you can see how big
+> it actually is."
+
+### 1:54 – 2:35 · The part that matters most
+**File:** `sim/index.html` — click **step 3**. Pause two seconds. Let the
+refusal sit on screen.
+
+> "Same brand. Same three neighbours. Different question. What should it
 > charge?
 >
-> It refuses.
+> It refuses to answer.
 >
-> Price response depends on a brand's own positioning far more than on its
-> category — so the neighbours remove almost none of the uncertainty. It says
-> so, and tells the team to run a real price test instead.
+> Here's why. What people will pay depends on the brand itself. Its
+> positioning. Its pack sizes. Not really on the category.
 >
-> This is the part I'd want you to take away. Knowing when your other brands
-> are no help isn't a limitation of this thing. It's the reason it's worth
-> building."
+> So knowing what The Good Bug charges doesn't help much. The system works
+> that out and says so. It tells the team to go run a real price test.
+>
+> This is the part I'd want you to remember. Knowing when the other brands
+> can't help isn't a weakness. It's the reason this is worth building."
 
-### 2:18 – 2:45 · Why the obvious version is dangerous
-**Screen:** Click **step 4**.
+### 2:35 – 3:03 · Why the easy version is dangerous
+**File:** `sim/index.html` — click **step 4**.
 
-> "Because here's the obvious version: average all eleven brands together and
-> serve one number. Which is what most 'central AI brain' proposals actually
-> are.
+> "Here's the easy version. Average all eleven brands and give one number.
+> That's what most 'central AI brain' ideas actually are.
 >
-> Tight, confident answer. Right about seven percent of the time, while
-> telling you eighty.
+> It sounds better. Tight number, very confident.
 >
-> A wide honest answer sends the team to test. A narrow confident wrong one
-> sends them to spend."
+> It's also right seven times in a hundred. While telling you eighty.
+>
+> An honest wide answer makes a team go and test. A confident wrong one makes
+> them go and spend."
 
 ---
 
-# Act 3 · The substance (2:45 – 3:58)
+# Act 3 · The substance (3:03 – 4:17)
 
-### 2:45 – 3:13 · It's real code, and it argued back
-**Screen:** Terminal. Run `python cold_start.py`. Talk while it runs. Stop
+### 3:03 – 3:30 · Real code, and it argued back
+**File:** terminal — run `python cold_start.py`. Talk while it runs. Stop
 scrolling on the "where is the compounding" table.
 
-> "None of this is a mock-up — it's about six hundred lines of numpy, with a
-> hold-one-brand-out backtest that runs in CI.
+> "None of this is a mock-up. It's real code, and it runs its own tests.
 >
-> And it told me something I didn't want to hear. I assumed the payoff came
-> from portfolio size. It doesn't. Going from eleven brands to thirty buys
-> twelve percent. Giving one brand its first two *similar* brands buys
-> fifty-four."
-
-### 3:13 – 3:32 · The strategic consequence
-**Screen:** Back to tab 1, deck slide 7.
-
-> "Which means a house of brands compounds by going deeper into fewer
-> categories, not wider across more.
+> And it told me something I didn't want to hear.
 >
-> That's in the deck because the code produced it — not because it was the
-> pitch. It contradicted the pitch."
-
-### 3:32 – 3:58 · Monday
-**Screen:** Tab 3, `week1/index.html`. Scroll once through the form. Don't
-fill it in.
-
-> "Last thing. Everything so far needs sibling brands before it pays. This
-> doesn't.
+> I assumed the benefit came from having lots of brands. It doesn't. Eleven
+> brands to thirty only helps by twelve percent.
 >
-> Before a launch, whoever's deciding writes down what they expect and their
-> range. Ninety seconds. Two quarters of that and you know which operators
-> are calibrated on pricing versus creative — different people.
+> Giving one brand two similar neighbours helps by fifty-four."
+
+### 3:30 – 3:51 · What that means for Think9
+**File:** `deck/brand-zero.pdf` — back to tab 1, **slide 7**.
+
+> "So here's what that means.
 >
-> One file, no install. It's the first thing I'd ship."
+> A house of brands gets smarter by going deeper into a few categories. Not
+> by spreading across many.
+>
+> That's in my deck because the code found it. It's the opposite of what I
+> set out to prove."
+
+### 3:51 – 4:17 · What you could start on Monday
+**File:** `week1/index.html` — tab 3. Scroll once through the form. Don't fill
+it in.
+
+> "One last thing. Everything so far needs other brands. This doesn't.
+>
+> Before a launch, whoever's deciding writes down what they expect. Ninety
+> seconds.
+>
+> Do that for six months and you'll know who's good at guessing prices, and
+> who's good at guessing creative. Usually different people.
+>
+> One file. Nothing to install. It's the first thing I'd build."
 
 ---
 
-# Act 4 · Close (3:58 – 4:29)
+# Act 4 · Close (4:17 – 4:52)
 
-**Screen:** Deck slide 12 (the 30-day plan) for a beat, then the last slide.
+**File:** `deck/brand-zero.pdf` — **slide 12** for a beat, then the last slide.
 
-> "There's a thirty-day plan in the deck, sequenced by what pays at eleven
-> brands rather than thirty.
+> "There's a thirty-day plan in the deck for the rest. It's ordered by what
+> helps at eleven brands, not at thirty.
 >
-> And one caveat I'd rather say than have you find: these numbers are
-> simulated. What would settle it is that same backtest pointed at Think9's
-> real ledger — a week-three measurement in the plan, not a claim I'm making
-> today.
+> One honest thing before I stop. These numbers come from a simulation, not
+> from Think9's real data. I don't have that.
+>
+> To find out if this really works, you run the same test on Think9's real
+> numbers. That's week three of the plan.
 >
 > Code, deck and write-up are in the repo. Thanks for watching."
 
@@ -171,32 +208,46 @@ fill it in.
 
 ## Why this order
 
-The two opening slides are doing one job: telling the viewer what they are
-about to look at. Everything after that is live, because a PDF cannot show a
-system refusing to answer — and that refusal is the whole argument.
+The two opening slides do one job: tell the viewer what they are about to look
+at. Everything after that is live, because a PDF cannot show a system refusing
+to answer — and that refusal is the whole argument.
 
-Coming back to slides in Act 3 is deliberate too. The terminal *proves* the
-finding; slide 7 *states* it. Proof then claim, in that order, is far more
-persuasive than a slide someone has to take on trust.
+Coming back to a slide in Act 3 is deliberate. The terminal *proves* the
+finding; the slide *states* it. Proof first, claim second, is much more
+convincing than a slide someone has to take on trust.
+
+## How the words were chosen
+
+Written to be heard once. Sentences average eight words; the longest is
+nineteen. No jargon survives in the spoken parts. Where an idea needed a
+technical name, it got a plain description instead:
+
+| Not this | This |
+|---|---|
+| "the neighbours remove the uncertainty" | "the range gets much narrower" |
+| "hold-one-brand-out backtest running in CI" | "real code, and it runs its own tests" |
+| "portfolio value of information" | "where the whole company learns the most" |
+| "which operators are calibrated" | "who's good at guessing prices" |
+| "the house-of-brands thesis" | "the whole point of a house of brands" |
+
+If you change a line while recording, hold that bar. The test: would someone
+who has never seen the deck follow it on one listen?
 
 ## If you need a 90-second cut
 
-Keep slide 1, then simulator steps 1 and 3, then the `cold_start.py` finding.
-Drop everything else. The refusal is the thing worth protecting — if only one
-idea survives the edit, make it that one.
+Keep slide 1, then simulator steps 1 and 3, then the finding from
+`cold_start.py`. Drop everything else. The refusal is the thing worth
+protecting.
 
 ## Things not to do
 
-- **Don't read the deck aloud.** Its job is to be opened afterwards, not
-  narrated now.
+- **Don't read the deck aloud.** Its job is to be opened afterwards.
 - **Don't narrate your clicks** ("now I'll click on…"). Click, pause, then say
   what changed.
-- **Don't linger on slides.** Two at the top, two near the end. If you find
-  yourself on slide 5 explaining evidence tiers, you've made a different,
-  worse video.
-- **Don't apologise for the synthetic data.** Once, plainly, at the close.
-  Hedging throughout reads as low confidence; one clear sentence reads as
-  rigour.
+- **Don't linger on slides.** Two at the top, two near the end.
+- **Don't apologise for the simulated numbers.** Once, plainly, at the end.
+  Hedging all the way through sounds unsure. One clear sentence sounds
+  rigorous.
 - **Don't restart after a stumble.** Pause two seconds, say the sentence
-  again cleanly, cut it in the edit. Restarting from the top is how a
-  four-minute video takes two hours.
+  again, cut it in the edit. Restarting from the top is how a four-minute
+  video takes two hours.
